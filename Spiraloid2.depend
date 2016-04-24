@@ -1,0 +1,391 @@
+# depslib dependency file v1.0
+1461499850 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\arrayimplementation.cpp
+	"Array.hpp"
+	"Position.hpp"
+	"allegro5/allegro.h"
+	"Eagle/StringWork.hpp"
+
+1461499653 c:\ctwoplus\progcode\allegro5\spiraloid2\src\array.hpp
+	"SignalHandling.hpp"
+	"Inline.hpp"
+	<vector>
+
+1461498897 c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.hpp
+	<cstdio>
+	<stdexcept>
+	<string>
+
+1461497446 c:\ctwoplus\progcode\allegro5\spiraloid2\src\inline.hpp
+
+1461479171 c:\ctwoplus\progcode\allegro5\spiraloid2\src\position.hpp
+
+1441925412 c:\libs\a5113distro\include\allegro5\allegro.h
+	"allegro5/base.h"
+	"allegro5/altime.h"
+	"allegro5/bitmap.h"
+	"allegro5/bitmap_draw.h"
+	"allegro5/bitmap_io.h"
+	"allegro5/bitmap_lock.h"
+	"allegro5/blender.h"
+	"allegro5/clipboard.h"
+	"allegro5/color.h"
+	"allegro5/config.h"
+	"allegro5/cpu.h"
+	"allegro5/debug.h"
+	"allegro5/display.h"
+	"allegro5/drawing.h"
+	"allegro5/error.h"
+	"allegro5/events.h"
+	"allegro5/file.h"
+	"allegro5/fixed.h"
+	"allegro5/fmaths.h"
+	"allegro5/fshook.h"
+	"allegro5/fullscreen_mode.h"
+	"allegro5/haptic.h"
+	"allegro5/joystick.h"
+	"allegro5/keyboard.h"
+	"allegro5/memory.h"
+	"allegro5/monitor.h"
+	"allegro5/mouse.h"
+	"allegro5/mouse_cursor.h"
+	"allegro5/path.h"
+	"allegro5/render_state.h"
+	"allegro5/shader.h"
+	"allegro5/system.h"
+	"allegro5/threads.h"
+	"allegro5/timer.h"
+	"allegro5/tls.h"
+	"allegro5/touch_input.h"
+	"allegro5/transformations.h"
+	"allegro5/utf8.h"
+	"allegro5/alcompat.h"
+
+1453599662 c:\libs\a5113distro\include\allegro5\base.h
+	<errno.h>
+	<limits.h>
+	<limits.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<sys/types.h>
+	<fortify/fortify.h>
+	<dmalloc.h>
+	"allegro5/internal/alconfig.h"
+
+1405884229 c:\libs\a5113distro\include\allegro5\internal\alconfig.h
+	"allegro5/platform/alplatf.h"
+	"allegro5/platform/alwatcom.h"
+	"allegro5/platform/almngw32.h"
+	"allegro5/platform/albcc32.h"
+	"allegro5/platform/almsvc.h"
+	"allegro5/platform/aliphonecfg.h"
+	"allegro5/platform/alosxcfg.h"
+	"allegro5/platform/alandroidcfg.h"
+	"allegro5/platform/alraspberrypicfg.h"
+	"allegro5/platform/alucfg.h"
+	"allegro5/platform/allegro_sdl_config.h"
+	"allegro5/platform/astdint.h"
+	"allegro5/platform/astdbool.h"
+
+1453958441 c:\libs\a5113distro\include\allegro5\platform\alplatf.h
+
+1365822194 c:\libs\a5113distro\include\allegro5\platform\alwatcom.h
+	<io.h>
+	<i86.h>
+	<conio.h>
+	<fcntl.h>
+	<direct.h>
+	<malloc.h>
+
+1365822868 c:\libs\a5113distro\include\allegro5\platform\almngw32.h
+	<io.h>
+	<fcntl.h>
+	<direct.h>
+	<malloc.h>
+	"allegro5/platform/alplatf.h"
+
+1365822868 c:\libs\a5113distro\include\allegro5\platform\albcc32.h
+	<io.h>
+	<fcntl.h>
+	<direct.h>
+	<malloc.h>
+
+1365822868 c:\libs\a5113distro\include\allegro5\platform\almsvc.h
+	<io.h>
+	<fcntl.h>
+	<direct.h>
+	<malloc.h>
+	"allegro5/platform/alplatf.h"
+
+1354194640 c:\libs\a5113distro\include\allegro5\platform\aliphonecfg.h
+	<fcntl.h>
+	<unistd.h>
+
+1365822868 c:\libs\a5113distro\include\allegro5\platform\alosxcfg.h
+	"allegro5/platform/alplatf.h"
+
+1324193452 c:\libs\a5113distro\include\allegro5\platform\alandroidcfg.h
+
+1354194640 c:\libs\a5113distro\include\allegro5\platform\alraspberrypicfg.h
+	<fcntl.h>
+	<unistd.h>
+	<sys/types.h>
+
+1365822194 c:\libs\a5113distro\include\allegro5\platform\alucfg.h
+	<fcntl.h>
+	<unistd.h>
+	"alunix.h"
+	"allegro5/platform/alplatf.h"
+
+1266928920 c:\libs\a5113distro\include\allegro5\platform\alunix.h
+
+1405884229 c:\libs\a5113distro\include\allegro5\platform\allegro_sdl_config.h
+	<fcntl.h>
+	<unistd.h>
+
+1281015645 c:\libs\a5113distro\include\allegro5\platform\astdint.h
+	<inttypes.h>
+	<stdint.h>
+
+1281015645 c:\libs\a5113distro\include\allegro5\platform\astdbool.h
+	<stdbool.h>
+
+1285080581 c:\libs\a5113distro\include\allegro5\altime.h
+	"allegro5/base.h"
+
+1437150511 c:\libs\a5113distro\include\allegro5\bitmap.h
+	"allegro5/color.h"
+
+1440814392 c:\libs\a5113distro\include\allegro5\color.h
+	"allegro5/base.h"
+
+1354624034 c:\libs\a5113distro\include\allegro5\bitmap_draw.h
+	"allegro5/bitmap.h"
+
+1443033417 c:\libs\a5113distro\include\allegro5\bitmap_io.h
+	"allegro5/bitmap.h"
+	"allegro5/file.h"
+
+1419214822 c:\libs\a5113distro\include\allegro5\file.h
+	"allegro5/base.h"
+	"allegro5/path.h"
+	"allegro5/utf8.h"
+
+1337496593 c:\libs\a5113distro\include\allegro5\path.h
+	"allegro5/base.h"
+
+1337172889 c:\libs\a5113distro\include\allegro5\utf8.h
+	"allegro5/base.h"
+
+1418627215 c:\libs\a5113distro\include\allegro5\bitmap_lock.h
+	"allegro5/bitmap.h"
+
+1435297014 c:\libs\a5113distro\include\allegro5\blender.h
+
+1441578020 c:\libs\a5113distro\include\allegro5\clipboard.h
+	"allegro5/base.h"
+	"allegro5/display.h"
+	"allegro5/utf8.h"
+
+1450576911 c:\libs\a5113distro\include\allegro5\display.h
+	"allegro5/bitmap.h"
+	"allegro5/color.h"
+	"allegro5/events.h"
+
+1443707644 c:\libs\a5113distro\include\allegro5\events.h
+	"allegro5/altime.h"
+
+1351459757 c:\libs\a5113distro\include\allegro5\config.h
+	"allegro5/file.h"
+
+1441925412 c:\libs\a5113distro\include\allegro5\cpu.h
+	"allegro5/base.h"
+
+1351641789 c:\libs\a5113distro\include\allegro5\debug.h
+	<assert.h>
+	"allegro5/base.h"
+
+1354624034 c:\libs\a5113distro\include\allegro5\drawing.h
+	"allegro5/color.h"
+
+1281015645 c:\libs\a5113distro\include\allegro5\error.h
+	"allegro5/base.h"
+
+1281015645 c:\libs\a5113distro\include\allegro5\fixed.h
+	"allegro5/base.h"
+
+1281015645 c:\libs\a5113distro\include\allegro5\fmaths.h
+	"allegro5/base.h"
+	"allegro5/fixed.h"
+	"allegro5/inline/fmaths.inl"
+
+1365819842 c:\libs\a5113distro\include\allegro5\inline\fmaths.inl
+	"allegro5/error.h"
+
+1406021837 c:\libs\a5113distro\include\allegro5\fshook.h
+	"allegro5/base.h"
+	"allegro5/file.h"
+	"allegro5/path.h"
+	<sys/types.h>
+
+1354540159 c:\libs\a5113distro\include\allegro5\fullscreen_mode.h
+
+1433193411 c:\libs\a5113distro\include\allegro5\haptic.h
+	"allegro5/base.h"
+	"allegro5/display.h"
+	"allegro5/events.h"
+	"allegro5/joystick.h"
+	"allegro5/keyboard.h"
+	"allegro5/mouse.h"
+	"allegro5/touch_input.h"
+
+1354624034 c:\libs\a5113distro\include\allegro5\joystick.h
+	"allegro5/base.h"
+	"allegro5/events.h"
+
+1354624034 c:\libs\a5113distro\include\allegro5\keyboard.h
+	"allegro5/base.h"
+	"allegro5/events.h"
+	"allegro5/keycodes.h"
+
+1374896201 c:\libs\a5113distro\include\allegro5\keycodes.h
+
+1423033931 c:\libs\a5113distro\include\allegro5\mouse.h
+	"allegro5/base.h"
+	"allegro5/events.h"
+
+1354624034 c:\libs\a5113distro\include\allegro5\touch_input.h
+	"allegro5/base.h"
+	"allegro5/events.h"
+
+1286717132 c:\libs\a5113distro\include\allegro5\memory.h
+
+1354540935 c:\libs\a5113distro\include\allegro5\monitor.h
+
+1354624034 c:\libs\a5113distro\include\allegro5\mouse_cursor.h
+	"allegro5/base.h"
+
+1337488227 c:\libs\a5113distro\include\allegro5\render_state.h
+
+1363131182 c:\libs\a5113distro\include\allegro5\shader.h
+	"allegro5/base.h"
+	"allegro5/transformations.h"
+
+1427947664 c:\libs\a5113distro\include\allegro5\transformations.h
+	"allegro5/display.h"
+
+1333151678 c:\libs\a5113distro\include\allegro5\system.h
+	"allegro5/config.h"
+	"allegro5/path.h"
+
+1289090810 c:\libs\a5113distro\include\allegro5\threads.h
+	"allegro5/altime.h"
+
+1441686242 c:\libs\a5113distro\include\allegro5\timer.h
+	"allegro5/base.h"
+
+1440999795 c:\libs\a5113distro\include\allegro5\tls.h
+	"allegro5/base.h"
+
+1368871006 c:\libs\a5113distro\include\allegro5\alcompat.h
+
+1425928372 c:\ctwoplus\progcode\eagle5gui_git_bitbucket\include\eagle\stringwork.hpp
+	<string>
+	<list>
+
+1461503916 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.cpp
+	"Colors.hpp"
+	"allegro5/allegro_color.h"
+
+1461496768 c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.hpp
+	"Array.hpp"
+	"Values.hpp"
+	"allegro5/allegro.h"
+	"Inline.hpp"
+
+1461490178 c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.hpp
+
+1366725292 c:\libs\a5113distro\include\allegro5\allegro_color.h
+	"allegro5/allegro.h"
+
+1460585005 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.cpp
+	"Display.hpp"
+	<cstdio>
+	"allegro5/allegro_direct3d.h"
+
+1460433488 c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.hpp
+	"allegro5/allegro.h"
+	<cmath>
+
+1366553743 c:\libs\a5113distro\include\allegro5\allegro_direct3d.h
+	<d3d9.h>
+	<d3dx9.h>
+	"allegro5/platform/alplatf.h"
+
+1459302348 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\equations.cpp
+	"Equations.hpp"
+	<cmath>
+
+1461487981 c:\ctwoplus\progcode\allegro5\spiraloid2\src\equations.hpp
+	"Position.hpp"
+
+1460347077 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\keytestmain.cpp
+	"allegro5/allegro.h"
+	"allegro5/allegro_primitives.h"
+	<cstdio>
+
+1393649266 c:\libs\a5113distro\include\allegro5\allegro_primitives.h
+	<allegro5/allegro.h>
+
+1459321963 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\plotdata.cpp
+	"Equations.hpp"
+	"PlotData.hpp"
+	"SignalHandling.hpp"
+	<cmath>
+
+1460347059 c:\ctwoplus\progcode\allegro5\spiraloid2\src\plotdata.hpp
+	"Equations.hpp"
+	"SignalHandling.hpp"
+
+1461048354 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\resizetestmain.cpp
+	<stdio.h>
+	<allegro5/allegro.h>
+	<allegro5/debug.h>
+
+1459860249 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.cpp
+	"SignalHandling.hpp"
+
+1461496062 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidmain.cpp
+	"Spirals.hpp"
+	"Display.hpp"
+	"allegro5/allegro.h"
+	"allegro5/allegro_primitives.h"
+	"allegro5/allegro_image.h"
+	<cstdio>
+
+1461496862 c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.hpp
+	"allegro5/allegro.h"
+	"allegro5/allegro_primitives.h"
+	"Array.hpp"
+	"Values.hpp"
+	"Position.hpp"
+	"Colors.hpp"
+	"Inline.hpp"
+
+1281015645 c:\libs\a5113distro\include\allegro5\allegro_image.h
+
+1461494727 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.cpp
+	"Spirals.hpp"
+	"Equations.hpp"
+	<cmath>
+	<cstdio>
+	"allegro5/allegro_primitives.h"
+
+1461500192 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.cpp
+	"Values.hpp"
+	"SignalHandling.hpp"
+	<cmath>
+	<cstdio>
+
