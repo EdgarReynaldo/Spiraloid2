@@ -246,22 +246,77 @@ Value& Spiraloid::CircleRadiusValue() {
 
 
 
+Value& Spiraloid::RhombusXScaleValue() {
+   needs_refresh = true;
+   return rhombus_x_scale_value;
+}
+
+
+
+Value& Spiraloid::RhombusYScaleValue() {
+   needs_refresh = true;
+   return rhombus_y_scale_value;
+}
+
+
+
+Value& Spiraloid::RhombusDiagScaleValue() {
+   needs_refresh = true;
+   return rhombus_diag_scale_value;
+}
+
+
+
+void Spiraloid::Reset() {
+   double radius = 100.0;
+   double theta_start = 0.0;
+   double theta_stop = 360.0*25.0;
+   double theta_diff = 1.0;
+   double theta_offset = 360.0;
+   
+   double rotation_degrees = 0.0;
+   
+   
+   SetSpiraloidParameters(radius , theta_start , theta_stop , theta_diff , theta_offset);
+   SetRotation(rotation_degrees);
+   
+   colorset.RecalculateColors();
+   
+   Refresh();
+}
+/**
+#if 0
+   #define FIX_THE_CENTER \
+   if (fix_the_center) {\
+      double theta = rotation_degrees_value();\
+      int index = ?;\
+      while (theta > -360.0) {\
+            Pos2D p1 = spiral1.DataModified(index);\
+      }\
+   }\
+#else
+#endif // 0
+   
+//*/
+#define FIX_THE_CENTER (void)0
+
 #define DRAW_SPIRALOID(draw_func) \
-   for (unsigned int i = 1 ; i < spiral1.Size() ; ++i) { \
+   FIX_THE_CENTER;\
+   for (unsigned int i = 0 ; i < spiral1.Size() ; ++i) { \
       Pos2D sp1 = spiral1.DataModified(i); \
       Pos2D sp2 = spiral2.DataModified(i); \
       double x1 = sp1.x; \
       double y1 = sp1.y; \
       double x2 = sp2.x; \
       double y2 = sp2.y; \
-      draw_func(x1,y1,x2,y2,colorset.GetNextColor()); \
+      ALLEGRO_COLOR c = colorset.GetNextColor();\
+      draw_func(x1,y1,x2,y2,c); \
    }
-
 ///      void DrawOption1(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
 
 void Spiraloid::Draw() {
 
-   colorset.ResetIndex();
+   colorset.ResetColorIndex();
    switch (spiral_drawing_option_value.IVal()) {
    case 1 :
       DRAW_SPIRALOID(DrawOption1);
@@ -275,6 +330,12 @@ void Spiraloid::Draw() {
    case 4 :
       DRAW_SPIRALOID(DrawOption4);
       break;
+   case 5 :
+      DRAW_SPIRALOID(DrawOption5);
+      break;
+   case 6 :
+      DRAW_SPIRALOID(DrawOption6);
+      break;
    }
 
 }
@@ -283,17 +344,14 @@ void Spiraloid::Draw() {
 
 void Spiraloid::Update(double dt) {
    
-//   printf("Before update, rotation_degrees_value::ival == %d\n" , (int)rotation_degrees_value.IVal());
    double old_rotation = (double)rotation_degrees_value;
    double new_rotation = old_rotation + (double)rotation_dps_value*dt;
    if (new_rotation != old_rotation) {
       needs_refresh = true;
    }
    rotation_degrees_value = new_rotation;
-///   double new_rotation_value = (double)rotation_degrees_value;
-///   printf("Old rotation = %12.8lf , new rotation = %12.8lf , new value = %12.8lf\n" , old_rotation , new_rotation , new_rotation_value);
-//   printf("After update, rotation_degrees_value::ival == %d\n" , (int)rotation_degrees_value.IVal());
 
+   colorset.Update(dt);
 }
 
 
@@ -305,3 +363,83 @@ void Spiraloid::Refresh() {
       needs_refresh = false;
    }
 }
+
+
+
+
+void Spiraloid::DrawOption5(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   
+   const double cx = (x1 + x2)/2.0;
+   const double cy = (y1 + y2)/2.0;
+   const double hx = x2 - cx;
+   const double hy = y2 - cy;
+   
+   const double rxsv = (double)rhombus_x_scale_value;
+   const double rysv = (double)rhombus_y_scale_value;
+   double xpos1 = cx - (double)rysv*hx;
+   double ypos1 = cy - (double)rysv*hy;
+   double xpos2 = cx + (double)rysv*hx;
+   double ypos2 = cy + (double)rysv*hy;
+   double xpos3 = cx - (double)rxsv*hy;
+   double ypos3 = cy + (double)rxsv*hx;
+   double xpos4 = cx + (double)rxsv*hy;
+   double ypos4 = cy - (double)rxsv*hx;
+
+
+   al_draw_line(xpos1 , ypos1 , xpos4 , ypos4 , col , LineThicknessValue());
+   al_draw_line(xpos4 , ypos4 , xpos2 , ypos2 , col , LineThicknessValue());
+   al_draw_line(xpos2 , ypos2 , xpos3 , ypos3 , col , LineThicknessValue());
+   al_draw_line(xpos3 , ypos3 , xpos1 , ypos1 , col , LineThicknessValue());
+}
+
+
+
+void Spiraloid::DrawOption6(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   const double cx = (x1 + x2)/2.0;
+   const double cy = (y1 + y2)/2.0;
+   const double hx = x2 - cx;
+   const double hy = y2 - cy;
+   
+   const double rxsv = (double)rhombus_x_scale_value;
+   const double rysv = (double)rhombus_y_scale_value;
+
+   double xpos1 = cx - (double)rysv*hx;
+   double ypos1 = cy - (double)rysv*hy;
+   double xpos2 = cx + (double)rysv*hx;
+   double ypos2 = cy + (double)rysv*hy;
+   double xpos3 = cx - (double)rxsv*hy;
+   double ypos3 = cy + (double)rxsv*hx;
+   double xpos4 = cx + (double)rxsv*hy;
+   double ypos4 = cy - (double)rxsv*hx;
+
+   const double rdsv = (double)rhombus_diag_scale_value;
+   
+   double xpos5 = cx + rdsv*(hx - hy);
+   double ypos5 = cy + rdsv*(hx + hy);
+   double xpos6 = cx + rdsv*(hx + hy);
+   double ypos6 = cy + rdsv*(hy - hx);
+   double xpos7 = cx - rdsv*(hx - hy);
+   double ypos7 = cy - rdsv*(hx + hy);
+   double xpos8 = cx - rdsv*(hx + hy);
+   double ypos8 = cy - rdsv*(hy - hx);
+
+   al_draw_line(xpos1 , ypos1 , xpos8 , ypos8 , col , LineThicknessValue());
+   al_draw_line(xpos8 , ypos8 , xpos3 , ypos3 , col , LineThicknessValue());
+   al_draw_line(xpos3 , ypos3 , xpos5 , ypos5 , col , LineThicknessValue());
+   al_draw_line(xpos5 , ypos5 , xpos2 , ypos2 , col , LineThicknessValue());
+   al_draw_line(xpos2 , ypos2 , xpos6 , ypos6 , col , LineThicknessValue());
+   al_draw_line(xpos6 , ypos6 , xpos4 , ypos4 , col , LineThicknessValue());
+   al_draw_line(xpos4 , ypos4 , xpos7 , ypos7 , col , LineThicknessValue());
+   al_draw_line(xpos7 , ypos7 , xpos1 , ypos1 , col , LineThicknessValue());
+}
+
+
+
+void Spiraloid::DrawOption7(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   (void)x1;
+   (void)x2;
+   (void)y1;
+   (void)y2;
+   (void)col;
+}
+

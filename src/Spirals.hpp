@@ -15,6 +15,18 @@
 #include "Position.hpp"
 #include "Colors.hpp"
 #include "Inline.hpp"
+#include "Display.hpp"
+
+
+enum SPIRAL_DRAWING_OPTION {
+   SPIRAL_NONE = 0,
+   SPIRAL_STRAIGHTLINE = 1,
+   SPIRAL_MIRROREDLINE = 2,
+   SPIRAL_ROTATEDLINE = 3,
+   SPIRAL_CIRCLE = 4,
+   SPIRAL_RHOMBUS = 5,
+   SPIRAL_OCTAGON = 6
+};
 
 
 
@@ -110,9 +122,13 @@ private :
    /// Options
    Value spiral_drawing_option_value;
    Value circle_radius_value;
+   Value rhombus_x_scale_value;
+   Value rhombus_y_scale_value;
+   Value rhombus_diag_scale_value;
 
    ///
    Colorset colorset;
+   Value colorset_cycle_value;
    
 ///   Value colorset_index_value;
    
@@ -121,6 +137,7 @@ private :
    Spiral2D spiral2;
    
    bool needs_refresh;
+   bool fix_the_center;
    
 
 
@@ -144,9 +161,15 @@ public :
          line_thickness_value(),
          spiral_drawing_option_value(),
          circle_radius_value(),
+         rhombus_x_scale_value(),
+         rhombus_y_scale_value(),
+         rhombus_diag_scale_value(),
+         colorset(),
+         colorset_cycle_value(),
          spiral1(),
          spiral2(),
-         needs_refresh(true)
+         needs_refresh(true),
+         fix_the_center(true)
          
    {
       radial_delta_value.SetValues(0 , 10000 , 1000000 , -2);
@@ -156,8 +179,13 @@ public :
       theta_offset_value.SetValues(0 , 36000 , 36000*3 , -2);
       line_thickness_value.SetValues(1 , 100 , 10000 , -2);
       
-      spiral_drawing_option_value.SetValues(1 , 1 , 4 , 0 , true);
+      spiral_drawing_option_value.SetValues(1 , 1 , 6 , 0 , true);
       circle_radius_value.SetValues(1,100,10000,-1);
+      rhombus_x_scale_value.SetValues(1,100,10000,-2);
+      rhombus_y_scale_value.SetValues(1,100,10000,-2);
+      rhombus_diag_scale_value.SetValues(1,100,10000,-2);
+      
+      colorset_cycle_value.SetValues(-36000 , 0 , 36000 , -2);
    }
    
    void SetSpiraloidParameters(const double rdelta , const double tstart , const double tstop , const double tdelta , const double toffset);
@@ -176,7 +204,12 @@ public :
 
    Value& SpiralDrawingOptionValue();
    Value& CircleRadiusValue();
+   Value& RhombusXScaleValue();
+   Value& RhombusYScaleValue();
+   Value& RhombusDiagScaleValue();
    
+   void Reset();
+
    void Draw();
 
 private :
@@ -195,18 +228,21 @@ private :
 
 
 void INLINE DrawOption1(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   /// Draw STRAIGHTLINE between two points
    al_draw_line(x1 , y1 , x2 , y2 , col , (double)LineThicknessValue());
 }
 
 
 
 void INLINE DrawOption2(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   /// Draw OPPOSITELINE between two points
    al_draw_line(x1 , y2 , x2 , y1 , col , (double)LineThicknessValue());
 }
 
 
 
 void INLINE DrawOption3(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   /// Draw ROTATEDLINE between two points
    double cx = (x1 + x2)/2.0;
    double cy = (y1 + y2)/2.0;
    double hx = x2 - cx;
@@ -221,11 +257,15 @@ void INLINE DrawOption3(double x1 , double y1 , double x2 , double y2 , ALLEGRO_
 
 
 void INLINE DrawOption4(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
+   /// Draw CIRCLE at midpoint
    double cx = (x1 + x2)/2.0;
    double cy = (y1 + y2)/2.0;
    al_draw_circle(cx , cy , (double)CircleRadiusValue() , col , (double)LineThicknessValue());
 }
 
+   void DrawOption5(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
+   void DrawOption6(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
+   void DrawOption7(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
    
    
 public :
@@ -234,28 +274,6 @@ public :
    void Refresh();
 
 };
-
-
-
-/*
-void Spiraloid::DrawOption5(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
-   
-}
-
-
-
-void Spiraloid::DrawOption6(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
-   
-}
-
-
-
-void Spiraloid::DrawOption7(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col) {
-   
-}
-*/
-
-
 
 
 #endif // Spirals_HPP

@@ -9,6 +9,10 @@
 using std::string;
 
 
+   
+
+void AllegroAssertHandler(const char* exp , const char* file , int line , const char* func);
+
 void Assert(bool exp);
 
 class Exception : public std::runtime_error {

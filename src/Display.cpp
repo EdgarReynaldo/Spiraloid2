@@ -8,6 +8,12 @@
 #include "allegro5/allegro_direct3d.h"
 
 
+
+/// ------------------------     Display     ------------------------------------------
+
+
+
+
 int Display::new_display_flags = ALLEGRO_DIRECT3D;
 ///int Display::new_display_flags = ALLEGRO_OPENGL;
 

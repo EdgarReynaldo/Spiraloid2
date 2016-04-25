@@ -16,7 +16,7 @@
       #undef INLINE
    #endif
    #define INLINE inline
-   #define DONTINLINE
+   #define DONTINLINE __attribute__ ((noinline))
 #endif
 
 

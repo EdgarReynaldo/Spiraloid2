@@ -49,6 +49,7 @@ public :
    int Exponent() {return exponent;}
    
    operator int();
+   operator float();
    operator double();
    long long IVal() {return ival;}
 
@@ -61,6 +62,8 @@ public :
    void operator+=(double value);
    void operator-=(double value);
 
+   Value& operator++(int);
+   Value& operator--(int);
    
    
 };

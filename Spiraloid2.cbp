@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Spiraloid2debug" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Spiraloid2debug" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -22,7 +22,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="Spiraloid2" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Spiraloid2" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -37,7 +37,7 @@
 				</Linker>
 			</Target>
 			<Target title="StaticDebug">
-				<Option output="Spiraloid2debugstatic" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Spiraloid2debugstatic" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -75,7 +75,7 @@
 				</Linker>
 			</Target>
 			<Target title="StaticRelease">
-				<Option output="Spiraloid2static" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Spiraloid2static" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -127,32 +127,40 @@
 			<Add directory="C:/LIBS/A5113distro/lib" />
 			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
 		</Linker>
-		<Unit filename="Array.hpp" />
-		<Unit filename="ArrayImplementation.cpp" />
-		<Unit filename="Colors.cpp" />
-		<Unit filename="Colors.hpp" />
-		<Unit filename="Display.cpp" />
-		<Unit filename="Display.hpp" />
-		<Unit filename="Equations.cpp" />
-		<Unit filename="Equations.hpp" />
-		<Unit filename="Inline.hpp" />
-		<Unit filename="KeyTestMain.cpp">
+		<Unit filename="src/Array.hpp" />
+		<Unit filename="src/ArrayImplementation.cpp" />
+		<Unit filename="src/Colors.cpp" />
+		<Unit filename="src/Colors.hpp" />
+		<Unit filename="src/Display.cpp" />
+		<Unit filename="src/Display.hpp" />
+		<Unit filename="src/Equations.cpp" />
+		<Unit filename="src/Equations.hpp" />
+		<Unit filename="src/Inline.hpp" />
+		<Unit filename="src/KeyTestMain.cpp">
 			<Option link="0" />
 		</Unit>
-		<Unit filename="PlotData.cpp" />
-		<Unit filename="PlotData.hpp" />
-		<Unit filename="Position.hpp" />
-		<Unit filename="ResizeTestMain.cpp">
+		<Unit filename="src/Monitors.cpp" />
+		<Unit filename="src/Monitors.hpp" />
+		<Unit filename="src/PlotData.cpp" />
+		<Unit filename="src/PlotData.hpp" />
+		<Unit filename="src/Position.hpp" />
+		<Unit filename="src/Program.cpp" />
+		<Unit filename="src/Program.hpp" />
+		<Unit filename="src/RefreshRate.hpp" />
+		<Unit filename="src/ResizeTestMain.cpp">
 			<Option link="0" />
 		</Unit>
-		<Unit filename="SignalHandling.cpp" />
-		<Unit filename="SignalHandling.hpp" />
-		<Unit filename="SpiraloidMain.cpp" />
-		<Unit filename="Spirals.cpp" />
-		<Unit filename="Spirals.hpp" />
-		<Unit filename="TODO.txt" />
-		<Unit filename="Values.cpp" />
-		<Unit filename="Values.hpp" />
+		<Unit filename="src/SignalHandling.cpp" />
+		<Unit filename="src/SignalHandling.hpp" />
+		<Unit filename="src/SpiraloidController.cpp" />
+		<Unit filename="src/SpiraloidController.hpp" />
+		<Unit filename="src/SpiraloidMain.cpp" />
+		<Unit filename="src/SpiraloidScreen.cpp" />
+		<Unit filename="src/SpiraloidScreen.hpp" />
+		<Unit filename="src/Spirals.cpp" />
+		<Unit filename="src/Spirals.hpp" />
+		<Unit filename="src/Values.cpp" />
+		<Unit filename="src/Values.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

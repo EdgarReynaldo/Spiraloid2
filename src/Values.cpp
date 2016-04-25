@@ -170,6 +170,12 @@ Value::operator int() {
 
 
 
+Value::operator float() {
+   return (float)dval;
+}
+
+
+
 Value::operator double() {
    return dval;
 /*
@@ -238,6 +244,17 @@ void Value::operator-=(double value) {
    
 
 
+Value& Value::operator++(int) {
+   Increment(1,exponent);
+   return *this;
+}
+
+
+
+Value& Value::operator--(int) {
+   Decrement(1,exponent);
+   return *this;
+}
 
 
 

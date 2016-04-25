@@ -10,8 +10,6 @@
 #include <cmath>
 
 
-
-
 class Display {
    static int new_display_flags;
    

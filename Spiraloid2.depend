@@ -5,17 +5,17 @@
 	"allegro5/allegro.h"
 	"Eagle/StringWork.hpp"
 
-1461499653 c:\ctwoplus\progcode\allegro5\spiraloid2\src\array.hpp
+1461522222 c:\ctwoplus\progcode\allegro5\spiraloid2\src\array.hpp
 	"SignalHandling.hpp"
 	"Inline.hpp"
 	<vector>
 
-1461498897 c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.hpp
+1461517080 c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.hpp
 	<cstdio>
 	<stdexcept>
 	<string>
 
-1461497446 c:\ctwoplus\progcode\allegro5\spiraloid2\src\inline.hpp
+1461521998 c:\ctwoplus\progcode\allegro5\spiraloid2\src\inline.hpp
 
 1461479171 c:\ctwoplus\progcode\allegro5\spiraloid2\src\position.hpp
 
@@ -295,27 +295,28 @@
 	<string>
 	<list>
 
-1461503916 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.cpp
+1461550920 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.cpp
 	"Colors.hpp"
 	"allegro5/allegro_color.h"
 
-1461496768 c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.hpp
+1461551437 c:\ctwoplus\progcode\allegro5\spiraloid2\src\colors.hpp
 	"Array.hpp"
 	"Values.hpp"
+	"RefreshRate.hpp"
 	"allegro5/allegro.h"
 	"Inline.hpp"
 
-1461490178 c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.hpp
+1461546707 c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.hpp
 
 1366725292 c:\libs\a5113distro\include\allegro5\allegro_color.h
 	"allegro5/allegro.h"
 
-1460585005 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.cpp
+1461514273 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.cpp
 	"Display.hpp"
 	<cstdio>
 	"allegro5/allegro_direct3d.h"
 
-1460433488 c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.hpp
+1461514158 c:\ctwoplus\progcode\allegro5\spiraloid2\src\display.hpp
 	"allegro5/allegro.h"
 	<cmath>
 
@@ -354,18 +355,16 @@
 	<allegro5/allegro.h>
 	<allegro5/debug.h>
 
-1459860249 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.cpp
+1461517049 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\signalhandling.cpp
 	"SignalHandling.hpp"
 
-1461496062 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidmain.cpp
+1461514474 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidmain.cpp
 	"Spirals.hpp"
 	"Display.hpp"
-	"allegro5/allegro.h"
-	"allegro5/allegro_primitives.h"
-	"allegro5/allegro_image.h"
+	"Program.hpp"
 	<cstdio>
 
-1461496862 c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.hpp
+1461548824 c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.hpp
 	"allegro5/allegro.h"
 	"allegro5/allegro_primitives.h"
 	"Array.hpp"
@@ -373,19 +372,69 @@
 	"Position.hpp"
 	"Colors.hpp"
 	"Inline.hpp"
+	"Display.hpp"
 
 1281015645 c:\libs\a5113distro\include\allegro5\allegro_image.h
 
-1461494727 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.cpp
+1461551038 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spirals.cpp
 	"Spirals.hpp"
 	"Equations.hpp"
 	<cmath>
 	<cstdio>
 	"allegro5/allegro_primitives.h"
 
-1461500192 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.cpp
+1461546702 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\values.cpp
 	"Values.hpp"
 	"SignalHandling.hpp"
 	<cmath>
 	<cstdio>
+
+1461514458 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\monitor.cpp
+	"Monitor.hpp"
+
+1461516187 c:\ctwoplus\progcode\allegro5\spiraloid2\src\monitor.hpp
+	"allegro5/allegro.h"
+	<vector>
+
+1461534200 c:\ctwoplus\progcode\allegro5\spiraloid2\src\program.hpp
+	"allegro5/allegro.h"
+	"allegro5/allegro_primitives.h"
+	"allegro5/allegro_image.h"
+	"Monitors.hpp"
+	"Display.hpp"
+	"SpiraloidController.hpp"
+	"SignalHandling.hpp"
+	"SpiraloidScreen.hpp"
+
+1461534328 c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidcontroller.hpp
+	"Spirals.hpp"
+	"Display.hpp"
+
+1461534584 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\program.cpp
+	"Program.hpp"
+	"Eagle/StringWork.hpp"
+
+1461548146 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidcontroller.cpp
+	"SpiraloidController.hpp"
+
+1461530204 c:\ctwoplus\progcode\allegro5\spiraloid2\src\monitors.hpp
+	"allegro5/allegro.h"
+	<vector>
+
+1461546928 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\monitors.cpp
+	"Monitors.hpp"
+
+1461531300 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\programscreen.cpp
+
+1461534682 c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidscreen.hpp
+	"ProgramScreen.hpp"
+	"SpiraloidController.hpp"
+
+1461534690 c:\ctwoplus\progcode\allegro5\spiraloid2\src\programscreen.hpp
+	"allegro5/allegro.h"
+
+1461534554 source:c:\ctwoplus\progcode\allegro5\spiraloid2\src\spiraloidscreen.cpp
+	"SpiraloidScreen.hpp"
+
+1461551251 c:\ctwoplus\progcode\allegro5\spiraloid2\src\refreshrate.hpp
 

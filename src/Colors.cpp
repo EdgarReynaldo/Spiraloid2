@@ -41,8 +41,8 @@ float colorset1[12][4] = {
 #define NUM_COLORSETS 2
 
 float* colorsets[NUM_COLORSETS] = {
-   rainbow_colorset,
-   colorset1
+   &rainbow_colorset[0][0],
+   &colorset1[0][0]
 };
 
 void Colorset::RecalculateColors() {
@@ -73,7 +73,14 @@ void Colorset::RecalculateColors() {
       const double da_delta = (da2 - da)/num_shades;
       unsigned int index = (unsigned int)c*num_shades_value.IVal();
       for (int s = 0 ; s < num_shades_value.IVal() ; ++s) {
-         colorset[(total_num_colors - 1) - index] = colorset[index] = al_map_rgba((int)dr , (int)dg , (int)db , (int)da);
+         ALLEGRO_COLOR c = al_map_rgba((unsigned char)dr , (unsigned char)dg , (unsigned char)db , (unsigned char)da);
+         colorset[index] = c;
+         if (flip_colors) {
+            colorset[(total_num_colors - 1) - index] = c;
+         }
+         else {
+            colorset[index + total_num_colors/2] = c;
+         }
          ++index;
          dr += dr_delta;
          dg += dg_delta;
@@ -82,7 +89,8 @@ void Colorset::RecalculateColors() {
       }
    }
    
-   color_index_value.SetValues(0 , color_index_value.IVal() , total_num_colors*civ_factor - 1 , civ_exponent , true);
+   color_index_start_value.SetValues(0 , 0 , total_num_colors*civ_factor - 1 , civ_exponent , true);
+   color_index_value.SetValues(0 , 0 , total_num_colors*civ_factor - 1 , civ_exponent , true);
    
    needs_refresh = false;
 }
@@ -121,6 +129,13 @@ void Colorset::SetColors(float* twelve_hsla_quartets) {
    }
    needs_refresh = true;
 }
+
+
+
+void Colorset::Update(double dt) {
+   color_index_start_value += (double)color_cycle_rate*dt;
+}
+
 
 
 

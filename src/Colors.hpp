@@ -6,6 +6,8 @@
 
 #include "Array.hpp"
 #include "Values.hpp"
+#include "RefreshRate.hpp"
+
 #include "allegro5/allegro.h"
 
 
@@ -23,6 +25,8 @@ private :
    Array<ALLEGRO_COLOR> colorset;
    Value color_index_value;
    Value color_cycle_rate;
+   Value color_index_start_value;
+   bool color_cycle_forward;
    
    int civ_factor;
    int civ_exponent;
@@ -35,16 +39,23 @@ private :
    
    
    
-   void RecalculateColors();
+
+   Colorset(const Colorset& cs) {(void)cs;}
+   Colorset& operator=(const Colorset& cs) {(void)cs;return *this;}
    
+      
 public :
-   
+   void RecalculateColors();
+
+      
    Colorset() :
          num_colors_value(),
          num_shades_value(),
          colorset(),
          color_index_value(),
          color_cycle_rate(),
+         color_index_start_value(),
+         color_cycle_forward(true),
          civ_factor(0),
          civ_exponent(0),
          colors(),
@@ -58,30 +69,31 @@ public :
       civ_exponent = -2;
       
       color_index_value.SetValues(0,0,0,0,true);
-      color_cycle_rate.SetValues(1,100,36000,-2);
+      color_cycle_rate.SetValues(0,100*REFRESHRATE,36000*REFRESHRATE,-2);
+      color_index_start_value.SetValues(0,0,0,0,true);
       
       memset(&colors , 0 , 12*sizeof(ALLEGRO_COLOR));
       
       SetRainbowColors();
       
-      RecalculateColors();
+///      RecalculateColors();
       
    }
    
    void SetRainbowColors();
    
-   void SetColors(float* twelve_hsl_triplets);
+   void SetColors(float* twelve_hsl_quartets);
    
-   void ResetIndex() {color_index_value.SetValue(0);}
+   void ResetColorIndex() {color_index_value.SetValue((double)color_index_start_value);}
    
-   INLINE ALLEGRO_COLOR& GetNextColor() {
-      unsigned int index = (unsigned int)(double)color_index_value;
-      color_index_value += (double)color_cycle_rate;
-      return colorset[index];
+   INLINE const ALLEGRO_COLOR& GetNextColor() {
+      return colorset[(unsigned int)(double)(color_index_value++)];
    }
    INLINE unsigned int Size() {return colorset.Size();}
    
    INLINE void Refresh() {RecalculateColors();}
+   
+   void Update(double dt);
 };
 
 

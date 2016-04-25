@@ -27,14 +27,14 @@ public :
 
    DONTINLINE unsigned int Size() {return data_array.size();}
 
-   DATA_TYPE& DataChecked(unsigned int index) throw (Exception);
+   DONTINLINE DATA_TYPE& DataChecked(unsigned int index) throw (Exception);
 
    INLINE DATA_TYPE& DataUnchecked(unsigned int index) {return data_array[index];}
    
-   INLINE DATA_TYPE& Data(unsigned int index);
+   INLINE  DATA_TYPE& Data(unsigned int index);
    
 
-   INLINE DATA_TYPE& operator[](unsigned int index) {return Data(index);}
+   INLINE  DATA_TYPE& operator[](unsigned int index) {return Data(index);}
    
    
    void Free();
