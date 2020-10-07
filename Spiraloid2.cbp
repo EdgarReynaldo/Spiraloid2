@@ -7,7 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Spiraloid2debug" prefix_auto="1" extension_auto="1" />
+				<Option output="e:/usr/bin/Spiraloid2D" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="e:/usr/bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,13 +17,14 @@
 					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add option="-leagle_debug.dll" />
-					<Add option="-leagle_a5_debug.dll" />
+					<Add option="-lEagleA5Debug" />
+					<Add option="-lEagleDebug" />
 					<Add option="-lallegro_monolith-debug.dll" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Spiraloid2" prefix_auto="1" extension_auto="1" />
+				<Option output="e:/usr/bin/Spiraloid2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="e:/usr/bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -30,14 +32,14 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
-					<Add option="-leagle.dll" />
-					<Add option="-leagle_a5.dll" />
+					<Add option="-lEagleA5" />
+					<Add option="-lEagle" />
 					<Add option="-lallegro_monolith.dll" />
 				</Linker>
 			</Target>
 			<Target title="StaticDebug">
-				<Option output="bin/Spiraloid2debugstatic" prefix_auto="1" extension_auto="1" />
+				<Option output="e:/usr/bin/Spiraloid2DS" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="e:/usr/bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -46,10 +48,11 @@
 					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add option="-leagle_debug-static" />
-					<Add option="-leagle_a5_debug-static" />
+					<Add option="-lEagleA5Debug" />
+					<Add option="-lEagleDebug" />
 					<Add option="-lallegro_monolith-static" />
 					<Add option="-ldumb" />
+					<Add option="-lwebp" />
 					<Add option="-lFLAC" />
 					<Add option="-lvorbisfile" />
 					<Add option="-lvorbis" />
@@ -72,10 +75,14 @@
 					<Add option="-ladvapi32" />
 					<Add option="-lws2_32" />
 					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
 				</Linker>
 			</Target>
 			<Target title="StaticRelease">
-				<Option output="bin/Spiraloid2static" prefix_auto="1" extension_auto="1" />
+				<Option output="e:/usr/bin/Spiraloid2S" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="e:/usr/bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -83,11 +90,11 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
-					<Add option="-leagle-static" />
-					<Add option="-leagle_a5-static" />
+					<Add option="-lEagleA5" />
+					<Add option="-lEagle" />
 					<Add option="-lallegro_monolith-static" />
 					<Add option="-ldumb" />
+					<Add option="-lwebp" />
 					<Add option="-lFLAC" />
 					<Add option="-lvorbisfile" />
 					<Add option="-lvorbis" />
@@ -110,6 +117,10 @@
 					<Add option="-ladvapi32" />
 					<Add option="-lws2_32" />
 					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
@@ -120,12 +131,10 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/LIBS/A5113distro/include" />
-			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
+			<Add directory="E:/usr/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/LIBS/A5113distro/lib" />
-			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
+			<Add directory="E:/usr/lib" />
 		</Linker>
 		<Unit filename="src/Array.hpp" />
 		<Unit filename="src/ArrayImplementation.cpp" />
@@ -161,10 +170,6 @@
 		<Unit filename="src/Spirals.hpp" />
 		<Unit filename="src/Values.cpp" />
 		<Unit filename="src/Values.hpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
