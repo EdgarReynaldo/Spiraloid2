@@ -18,7 +18,7 @@ void Spiral2D::GeneratePlotData() {
       double num_data = (theta_stop - theta_start)/theta_delta;
       num_data = ceil(num_data);
       
-      Assert(num_data >= 1.0);
+      EAGLE_ASSERT(num_data >= 1.0);
       
       unsigned int data_size = (unsigned int)num_data;
       
@@ -49,13 +49,15 @@ void Spiral2D::GeneratePlotData() {
 void Spiral2D::SetSpiralParameters(double rdelta , double tstart , double tstop , double tdelta) {
    /// Check parameters here...
    if (rdelta <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : rdelta non-positive!\n");
+      rdelta *= -1.0;
    }
    if ((tstop - tstart) <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : theta range non-positive!\n");
+      double ttemp = tstop;
+      tstop = tstart;
+      tstart = ttemp;
    }
    if (tdelta <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : tdelta non-positive!\n");
+      tdelta *= -1.0;
    }
 
    if (rdelta != radial_delta ||
@@ -108,11 +110,11 @@ void Spiral2D::Refresh() {
       for (unsigned int i = 0 ; i < Size() ; ++i) {
          Pos2D mod = DataOriginal(i);
          /// TODO : This is a hack
-         float x = mod.x;
-         float y = mod.y;
+         float x = mod.tx;
+         float y = mod.ty;
          al_transform_coordinates(&transform , &x , &y);
-         mod.x = x;
-         mod.y = y;
+         mod.tx = x;
+         mod.ty = y;
          DataModified(i) = mod;
       }
       transform_needs_refresh = false;
@@ -267,6 +269,37 @@ Value& Spiraloid::RhombusDiagScaleValue() {
 
 
 
+Value& Spiraloid::ColorIndexStartValue() {
+   return colorset.ColorIndexStartValue();
+}
+
+
+
+Value& Spiraloid::ColorCycleRate() {
+   return colorset.ColorCycleRate();
+}
+
+
+
+void Spiraloid::FlipColors(bool flip) {
+   colorset.FlipColors(flip);
+}
+
+
+
+void Spiraloid::CycleColors(bool cycle) {
+   color_cycle = cycle;
+}
+
+
+
+void Spiraloid::FixTheCenter(bool fix) {
+   fix_the_center = fix;
+   needs_refresh = true;
+}
+
+
+
 void Spiraloid::Reset() {
    double radius = 100.0;
    double theta_start = 0.0;
@@ -274,12 +307,10 @@ void Spiraloid::Reset() {
    double theta_diff = 1.0;
    double theta_offset = 360.0;
    
-   double rotation_degrees = 0.0;
-   
-   
    SetSpiraloidParameters(radius , theta_start , theta_stop , theta_diff , theta_offset);
-   SetRotation(rotation_degrees);
+   SetRotation(0.0);
    
+   colorset.ColorCycleRate() = 100;
    colorset.RecalculateColors();
    
    Refresh();
@@ -298,17 +329,26 @@ void Spiraloid::Reset() {
 #endif // 0
    
 //*/
-#define FIX_THE_CENTER (void)0
+#define FIX_THE_CENTER(draw_func) \
+   if (fix_the_center) { \
+      unsigned int i = 0; \
+      for (double theta = 0.0 ; theta < theta_offset_value.DVal() && theta < theta_stop ; theta += theta_delta_value.DVal()) { \
+         const Pos2D sp1(centerx , centery); \
+         Pos2D sp2 = spiral1.DataModified(i); \
+         ++i; \
+         draw_func(sp1.tx , sp1.ty , sp2.tx , sp2.ty , colorset.GetNextColor());\
+      }\
+   }
 
 #define DRAW_SPIRALOID(draw_func) \
-   FIX_THE_CENTER;\
+   FIX_THE_CENTER(draw_func);\
    for (unsigned int i = 0 ; i < spiral1.Size() ; ++i) { \
       Pos2D sp1 = spiral1.DataModified(i); \
       Pos2D sp2 = spiral2.DataModified(i); \
-      double x1 = sp1.x; \
-      double y1 = sp1.y; \
-      double x2 = sp2.x; \
-      double y2 = sp2.y; \
+      double x1 = sp1.tx; \
+      double y1 = sp1.ty; \
+      double x2 = sp2.tx; \
+      double y2 = sp2.ty; \
       ALLEGRO_COLOR c = colorset.GetNextColor();\
       draw_func(x1,y1,x2,y2,c); \
    }
@@ -351,7 +391,9 @@ void Spiraloid::Update(double dt) {
    }
    rotation_degrees_value = new_rotation;
 
-   colorset.Update(dt);
+   if (color_cycle) {
+      colorset.Update(dt);
+   }
 }
 
 
@@ -364,6 +406,12 @@ void Spiraloid::Refresh() {
    }
 }
 
+
+
+void Spiraloid::RefreshColors() {
+   colorset.Refresh();
+   
+}
 
 
 

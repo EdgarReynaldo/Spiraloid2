@@ -25,14 +25,7 @@ private :
    void RefreshIValue();
    
 public :
-   Value() :
-         dval(0.0),
-         ival(0),
-         vmin(0),
-         vmax(0),
-         vcycle(false),
-         exponent(0)
-   {}
+   Value();
    
    void SetValues(long long valuemin , long long value , long long valuemax , int power_of_ten , bool cycle = false);
    void SetValue(long long value);
@@ -52,7 +45,9 @@ public :
    operator float();
    operator double();
    long long IVal() {return ival;}
-
+   double DVal() {return dval;}
+   
+   
    Value& operator=(long long value);
    Value& operator=(int value);
    Value& operator=(double value);

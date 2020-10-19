@@ -47,42 +47,21 @@ private :
 public :
    void RecalculateColors();
 
-      
-   Colorset() :
-         num_colors_value(),
-         num_shades_value(),
-         colorset(),
-         color_index_value(),
-         color_cycle_rate(),
-         color_index_start_value(),
-         color_cycle_forward(true),
-         civ_factor(0),
-         civ_exponent(0),
-         colors(),
-         flip_colors(false),
-         needs_refresh(true)
-   {
-      num_colors_value.SetValues(1,12,12,0);
-      num_shades_value.SetValues(1,30,360,0);
-      
-      civ_factor = 100;
-      civ_exponent = -2;
-      
-      color_index_value.SetValues(0,0,0,0,true);
-      color_cycle_rate.SetValues(0,100*REFRESHRATE,36000*REFRESHRATE,-2);
-      color_index_start_value.SetValues(0,0,0,0,true);
-      
-      memset(&colors , 0 , 12*sizeof(ALLEGRO_COLOR));
-      
-      SetRainbowColors();
-      
-///      RecalculateColors();
-      
-   }
+   Colorset();
    
    void SetRainbowColors();
    
    void SetColors(float* twelve_hsl_quartets);
+   
+   void FlipColors(bool flip);
+   bool Flip() {return flip_colors;}
+   
+   Value& ColorIndexStartValue() {return color_index_start_value;}
+   Value& ColorCycleRate() {return color_cycle_rate;}
+   
+   Value& NumShades() {return num_shades_value;}
+   Value& NumColors() {return num_colors_value;}
+   
    
    void ResetColorIndex() {color_index_value.SetValue((double)color_index_start_value);}
    

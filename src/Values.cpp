@@ -2,37 +2,72 @@
 
 
 #include "Values.hpp"
-#include "SignalHandling.hpp"
 
 
 #include <cmath>
 #include <cstdio>
 
+#include "Eagle/Exception.hpp"
+
 
 
 void Value::FixDRange() {
-   double scale = pow(10.0 , exponent);
-   int range = 1 + vmax - vmin;
-   double dmax = (vmax + 1)*scale;
-   double dmin = vmin*scale;
-   if (vcycle) {/// perform modulus
-      double drange = range*scale;
-      if (dval >= dmax) {
-         double extra = (double)(int)((dval - dmin)/drange);
-         dval -= extra*drange;
+   
+   /// We know range is positive and vmin is less than vmax
+   /// We can't use ival here because someone may be setting a double value
+   const double power = pow(10.0 , exponent);
+   const double dmin = vmin*power;
+   const double dmax = vmax*power;
+   const double range = (1LL + vmax - vmin)*power;
+   if (vcycle) {
+      if (dval < dmin) {
+          dval += range*(double)(int)fmod(dmin - dval , range);
       }
-      else if (ival < vmin) {
-         double extra = (double)(int)((dmax - dval)/drange);
-         dval += extra*drange;
+      else if (dval > dmax) {
+          dval -= range*(double)(int)(fmod(dval - dmax , range) + 1.0);
       }
-      Assert(dval < dmax && dval >= dmin);
-   }
-   else {/// clamp values
-      if (dval > dmax) {dval = dmax;}
+    }
+   else {
+      /// Clamp values
       if (dval < dmin) {dval = dmin;}
+      else if (dval > dmax) {dval = dmax;}
    }
+   EAGLE_ASSERT(dval >= dmin);
+   EAGLE_ASSERT(dval <= dmax);
    RefreshIValue();
 }
+
+
+
+/**
+   if (dval < dmin || dval >= dmax) {
+      double scale = pow(10.0 , exponent);
+      int range = 1 + vmax - vmin;
+      double dmax = (vmax + 1)*scale;
+      double dmin = vmin*scale;
+      if (vcycle) {/// perform modulus
+         //dval = dmin + fmod(dval - dmin , dmax - dmin);/// *** THIS DOESN"T WORK FMOD HATES NEGATIVES
+      }
+      if (vcycle) {/// perform modulus
+         double drange = range*scale;
+         if (dval >= dmax) {
+            double extra = (double)(int)((dval - dmin)/drange);
+            dval -= extra*drange;
+         }
+         else if (ival < vmin) {
+            double extra = (double)(int)((dmax - dval)/drange);
+            dval += extra*drange;
+         }
+         EAGLE_ASSERT(dval < dmax && dval >= dmin);
+      }
+      else {/// clamp values
+         if (dval > dmax) {dval = dmax;}
+         if (dval < dmin) {dval = dmin;}
+      }
+      RefreshIValue();
+   }
+}
+   */
 
 
 
@@ -40,13 +75,14 @@ void Value::FixIRange() {
    if (vcycle) {/// perform modulus
       long long range = 1 + vmax - vmin;
       if (ival > vmax) {
+            // integer trucation
          int extra = (int)((ival - vmin)/range);
-         Assert(extra);
+         EAGLE_ASSERT(extra);
          ival -= extra*range;
       }
       else if (ival < vmin) {
          int extra = (int)((vmax - ival)/range);
-         Assert(extra);
+         EAGLE_ASSERT(extra);
          ival += extra*range;
       }
    }
@@ -60,9 +96,7 @@ void Value::FixIRange() {
 
 
 void Value::RefreshDValue() {
-   double val = ival;
-   double scale = pow(10.0 , exponent);
-   dval = val*scale;
+   dval = pow(10.0 , exponent)*(double)ival;
 }
 
 
@@ -73,6 +107,17 @@ void Value::RefreshIValue() {
    ival = (long long)(newdval + 0.5);
 ///   printf("Value::RefreshIValue - newdval == %12.16lf , newival == %d\n" , newdval , (int)ival);
 }
+
+
+
+Value::Value() :
+      dval(0.0),
+      ival(0),
+      vmin(0),
+      vmax(0),
+      vcycle(false),
+      exponent(0)
+{}
 
 
 
@@ -178,17 +223,6 @@ Value::operator float() {
 
 Value::operator double() {
    return dval;
-/*
-   double dval = ival;
-   int exp = exponent;
-   while (exp > 0) {
-      dval *= 10.0;
-   }
-   while (exp < 0) {
-      dval /= 10.0;
-   }
-   return dval;
-*/
 }
 
 

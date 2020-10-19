@@ -12,23 +12,19 @@
 
 class SpiraloidScreen : public ProgramScreen {
    
-
    SpiraloidController spiraloid_controller;
+   double dt;
    
    
 public :
    
-//   SpiraloidScreen();
-   SpiraloidScreen() :
-         ProgramScreen(),
-         spiraloid_controller()
-   {}
+   void SetRefresh(double dt);
    
-   virtual void SetKeyDownArray(bool* keys_down);
-
+   SpiraloidScreen();
+   
    virtual bool Init();
    
-   virtual bool HandleEvent(ALLEGRO_EVENT ev);
+   virtual bool HandleEvent(EagleEvent ev);
    virtual void Update(double dt);
    virtual void Draw();
 
@@ -36,12 +32,13 @@ public :
    virtual void ResetScreen();
 
    void SetSpiraloidTransform(double cx , double cy , double sx , double sy);
-   
 };
 
 
 
-
-
 #endif // SpiraloidScreen_HPP
+
+
+
+
 

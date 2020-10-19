@@ -4,10 +4,17 @@
 
 
 
-void SpiraloidScreen::SetKeyDownArray(bool* keys_down) {
-   ProgramScreen::SetKeyDownArray(keys_down);
-   this->keys_down = keys_down;
-   spiraloid_controller.SetKeyDownArray(keys_down);
+SpiraloidScreen::SpiraloidScreen() :
+      ProgramScreen(),
+      spiraloid_controller(),
+      dt(0.0)
+{}
+
+
+
+void SpiraloidScreen::SetRefresh(double dt) {
+   this->dt = dt;
+   spiraloid_controller.SetRefresh(dt);
 }
 
 
@@ -19,7 +26,7 @@ bool SpiraloidScreen::Init() {
 
 
 
-bool SpiraloidScreen::HandleEvent(ALLEGRO_EVENT ev) {
+bool SpiraloidScreen::HandleEvent(EagleEvent ev) {
    return spiraloid_controller.HandleInput(ev);
 }
 

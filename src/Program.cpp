@@ -10,39 +10,22 @@
 
 int Program::Init() {
    
-   if (!al_init()) {
-      return 1;
-   }
-///   void al_register_assert_handler(void (*handler)(char const *expr,
-///      char const *file, int line, char const *func))
+   a5sys = GetAllegro5System();
+   EAGLE_ASSERT(a5sys);
    
-   al_register_assert_handler(AllegroAssertHandler);
-   
-   if (!al_init_primitives_addon()) {
-      return 2;
-   }
-   if (!al_init_image_addon()) {
-      return 3;
-   }
-   if (!al_install_keyboard()) {
-      return 4;
-   }
-   if (!al_install_mouse()) {
-      return 5;
+   int ret = a5sys->Initialize(EAGLE_FULL_SETUP);
+   if (EAGLE_FULL_SETUP != ret) {
+      EagleLog() << "Failed to initialize some system components. Continuing." << std::endl;
    }
    
-   timer = al_create_timer(1.0/60.0);
-   queue = al_create_event_queue();
-   
-   al_register_event_source(queue , al_get_timer_event_source(timer));
-   al_register_event_source(queue , al_get_keyboard_event_source());
-   al_register_event_source(queue , al_get_mouse_event_source());
+   timer = a5sys->GetSystemTimer();
+   queue = a5sys->GetSystemQueue();
    
    
    /// Setup monitor info and display modes
    monitor_info.RefreshMonitorInfo();
    
-   Assert(monitor_info.NumMonitors() > 0);
+   EAGLE_ASSERT(monitor_info.NumMonitors() > 0);
    
    int adapter = monitor_info.GetAdapterNum(0);
    al_set_new_display_adapter(adapter);
@@ -60,22 +43,19 @@ int Program::Init() {
 ///   int wh = 600;
    
    if (!display.Create(fullscreen , fsw , fsh , ww , wh)) {
-      throw Exception(StringPrintF("Failed to create %d x %d %s.\n" ,
+      throw EagleException(StringPrintF("Failed to create %d x %d %s.\n" ,
                                     fullscreen?fsw:ww , fullscreen?fsh:wh , fullscreen?"Fullscreen window":"Window"));
    }
    al_clear_to_color(al_map_rgb(255,255,255));
    display.Flip();
    
-   al_register_event_source(queue , al_get_display_event_source(display));
-   
    for (int i = 0 ; i < NUM_SCREENS ; ++i) {
       ProgramScreen* pscreen = screens[i];
-      pscreen->SetKeyDownArray(keys_down);
       pscreen->Init();
    }
 
    spiraloid_screen.SetSpiraloidTransform(display.CX() , display.CY() , display.SX() , display.SY());
-   
+   spiraloid_screen.SetRefresh(timer->SPT());
    return 0;
 }
    
@@ -84,52 +64,40 @@ int Program::Init() {
    
 void Program::Run() {
 
-   al_start_timer(timer);
+   timer->Start();
    
    do {
       if (redraw) {
-         
          display.DrawToBuffer();
-         
          screens[active_screen]->Draw();
-         
          display.Flip();
-         
          redraw = false;
       }
       
       do {
-         ALLEGRO_EVENT ev;
-         al_wait_for_event(queue , &ev);
+         EagleEvent ev = a5sys->WaitForSystemEventAndUpdateState();
 
-         if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-            keys_down[ev.keyboard.keycode] = true;
-         }
-         if (ev.type == ALLEGRO_EVENT_KEY_UP) {
-            keys_down[ev.keyboard.keycode] = false;
-         }
-         if (ev.type == ALLEGRO_EVENT_DISPLAY_RESIZE) {
-            printf("ALLEGRO_EVENT_DISPLAY_RESIZE received.\n");
+         if (ev.type == EAGLE_EVENT_DISPLAY_RESIZE) {
+            printf("EAGLE_EVENT_DISPLAY_RESIZE received.\n");
             display.AcknowledgeResize();
             spiraloid_screen.SetSpiraloidTransform(display.CX() , display.CY() , display.SX() , display.SY());
             redraw = true;
          }
-         if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+         if (ev.type == EAGLE_EVENT_DISPLAY_CLOSE) {
             quit = true;
          }
-         if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-            if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+         if (ev.type == EAGLE_EVENT_KEY_DOWN) {
+            if (ev.keyboard.keycode == EAGLE_KEY_ESCAPE) {
                quit = true;
             }
-            if (ev.keyboard.keycode == ALLEGRO_KEY_F) {
+            if (ev.keyboard.keycode == EAGLE_KEY_F && input_key_held(EAGLE_KEY_ANY_SHIFT)) {
                fullscreen = !fullscreen;
                display.ToggleFullscreen();
                spiraloid_screen.SetSpiraloidTransform(display.CX() , display.CY() , display.SX() , display.SY());
-               al_register_event_source(queue , al_get_display_event_source(display));
                redraw = true;
             }
-            if (ev.keyboard.keycode == ALLEGRO_KEY_S) {
-               if (keys_down[ALLEGRO_KEY_LCTRL] || keys_down[ALLEGRO_KEY_RCTRL]) {
+            if (ev.keyboard.keycode == EAGLE_KEY_S) {
+               if (keydown[EAGLE_KEY_LCTRL] || keydown[EAGLE_KEY_RCTRL]) {
                   display.SaveScreenie();
                }
             }
@@ -143,7 +111,7 @@ void Program::Run() {
          
          if (quit) {break;}
 
-      } while (!al_is_event_queue_empty(queue));
+      } while (!a5sys->UpToDate());
       
    } while (!quit);
    

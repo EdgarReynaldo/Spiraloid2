@@ -7,7 +7,6 @@
 
 
 #include "Equations.hpp"
-#include "SignalHandling.hpp"
 
 ///class Equation2D;
 

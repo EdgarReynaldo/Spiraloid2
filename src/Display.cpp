@@ -14,7 +14,7 @@
 
 
 
-int Display::new_display_flags = ALLEGRO_DIRECT3D;
+int Display::new_display_flags = EAGLE_DIRECT3D;
 ///int Display::new_display_flags = ALLEGRO_OPENGL;
 
 
@@ -24,10 +24,11 @@ bool Display::CreateWindowed(int wwidth , int wheight) {
    fs = false;
    ww = wwidth;
    wh = wheight;
-   display_flags = new_display_flags | ALLEGRO_RESIZABLE | ALLEGRO_WINDOWED;// | ALLEGRO_NOFRAME;
-   al_set_new_display_flags(display_flags);
-   display = al_create_display(ww , wh);
-   if (!display) {return false;}
+   display_flags = new_display_flags | EAGLE_RESIZABLE | EAGLE_WINDOWED;// | ALLEGRO_NOFRAME;
+   win = a5sys->CreateGraphicsContext("Spiraloid" , ww , wh , display_flags);
+   if (!win && win->Valid()) {
+      return false;
+   }
    return CreateBuffer(ww,wh);
 }
 
@@ -38,10 +39,11 @@ bool Display::CreateFullScreen(int fswidth , int fsheight) {
    fs = true;
    fsw = fswidth;
    fsh = fsheight;
-   display_flags = new_display_flags | ALLEGRO_FULLSCREEN;
-   al_set_new_display_flags(display_flags);
-   display = al_create_display(fsw , fsh);
-   if (!display) {return false;}
+   display_flags = new_display_flags | EAGLE_FULLSCREEN;
+   win = a5sys->CreateGraphicsContext("Spiraloid" , fsw , fsh , display_flags);
+   if (!win && win->Valid()) {
+      return false;
+   }
    return CreateBuffer(fsw,fsh);
 }
 
@@ -49,7 +51,7 @@ bool Display::CreateFullScreen(int fswidth , int fsheight) {
 
 void Display::DestroyBuffer() {
    if (buffer) {
-      al_destroy_bitmap(buffer);
+      win->FreeImage(buffer);
       buffer = 0;
       bw = 0;
       bh = 0;
@@ -66,9 +68,9 @@ Display::~Display() {
 
 void Display::Destroy() {
    DestroyBuffer();
-   if (display) {
-      al_destroy_display(display);
-      display = 0;
+   if (win) {
+      a5sys->FreeGraphicsContext(win);
+      win = 0;
    }
 }
 
@@ -99,9 +101,7 @@ bool Display::CreateBuffer(int bwidth , int bheight) {
       centery = bh/2;
       scalex = (double)(fs?fsw:ww)/bw;
       scaley = (double)(fs?fsh:wh)/bh;
-   ///      al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
-      al_set_target_backbuffer(display);
-      buffer = al_create_bitmap(bw,bh);
+      buffer = dynamic_cast<Allegro5Image*>(win->CreateImage(bw , bh));
    }
    DrawToBuffer();
    return buffer;
@@ -111,11 +111,10 @@ bool Display::CreateBuffer(int bwidth , int bheight) {
 
 
 void Display::AcknowledgeResize() {
-   al_acknowledge_resize(display);
-   
+   win->AcknowledgeResize();
    if (!fs) {
-      ww = al_get_display_width(display);
-      wh = al_get_display_height(display);
+      ww = win->Width();
+      wh = win->Height();
       CreateBuffer(ww,wh);
    }
 }
@@ -129,16 +128,16 @@ bool Display::ToggleFullscreen() {
 
 
 void Display::DrawToBuffer() {
-   al_set_target_bitmap(buffer);
+   win->SetDrawingTarget(buffer);
 }
 
 
 
 void Display::Flip() {
-   al_set_target_backbuffer(display);
-   al_draw_scaled_bitmap(buffer , 0 , 0 , bw , bh , 0 , 0 , fs?fsw:ww , fs?fsh:wh , 0);
+   win->DrawToBackBuffer();
+   al_draw_scaled_bitmap(buffer->AllegroBitmap() , 0 , 0 , bw , bh , 0 , 0 , fs?fsw:ww , fs?fsh:wh , 0);
 //   al_draw_bitmap(buffer , 0 , 0 , 0);
-   al_flip_display();
+   win->FlipDisplay();
 }
 
 
@@ -147,7 +146,7 @@ bool Display::SaveScreenie() {
    do {
       sprintf(charbuf , "Screenie%d.png" , screenie_num++);
    } while (al_filename_exists(charbuf));
-   return al_save_bitmap(charbuf , buffer);
+   return al_save_bitmap(charbuf , buffer->AllegroBitmap());
 }
 
 

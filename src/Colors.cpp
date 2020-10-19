@@ -97,6 +97,37 @@ void Colorset::RecalculateColors() {
 
 
 
+Colorset::Colorset() :
+      num_colors_value(),
+      num_shades_value(),
+      colorset(),
+      color_index_value(),
+      color_cycle_rate(),
+      color_index_start_value(),
+      color_cycle_forward(true),
+      civ_factor(0),
+      civ_exponent(0),
+      colors(),
+      flip_colors(false),
+      needs_refresh(true)
+{
+   num_colors_value.SetValues(1,12,12,0);
+   num_shades_value.SetValues(1,30,360,0);
+   
+   civ_factor = 100;
+   civ_exponent = -2;
+   
+   color_index_value.SetValues(0,0,0,0,true);
+   color_cycle_rate.SetValues(0,100*REFRESHRATE,36000*REFRESHRATE,-2);
+   color_index_start_value.SetValues(0,0,0,0,true);
+   
+   memset(&colors , 0 , 12*sizeof(ALLEGRO_COLOR));
+   
+   SetRainbowColors();
+}
+
+
+
 void Colorset::SetRainbowColors() {
    
 ///void al_color_hsl_to_rgb(float hue, float saturation, float lightness,
@@ -127,6 +158,13 @@ void Colorset::SetColors(float* twelve_hsla_quartets) {
          al_color_hsl_to_rgb(h,s,l,&r,&g,&b);
          colors[i] = al_map_rgba_f(r,g,b,a);
    }
+   needs_refresh = true;
+}
+
+
+
+void Colorset::FlipColors(bool flip) {
+   flip_colors = flip;
    needs_refresh = true;
 }
 

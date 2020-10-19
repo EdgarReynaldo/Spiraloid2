@@ -4,6 +4,8 @@
 #ifndef ProgramScreen_HPP
 #define ProgramScreen_HPP
 
+#include "Eagle.hpp"
+
 
 #include "allegro5/allegro.h"
 
@@ -11,19 +13,12 @@
 
 class ProgramScreen {
    
-protected :
-   bool* keys_down;
-   
 public :
-   ProgramScreen() : keys_down(0) {}
-   
-   virtual void SetKeyDownArray(bool* keys_down) {this->keys_down = keys_down;}
-
    virtual ~ProgramScreen() {}
    
    virtual bool Init()=0;
    
-   virtual bool HandleEvent(ALLEGRO_EVENT ev)=0;
+   virtual bool HandleEvent(EagleEvent ev)=0;
    virtual void Update(double dt)=0;
    virtual void Draw()=0;
    
@@ -34,9 +29,9 @@ public :
 
 
 
-
-
-
-
 #endif // ProgramScreen_HPP
+
+
+
+
 

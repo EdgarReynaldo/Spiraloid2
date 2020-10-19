@@ -12,10 +12,13 @@
 
 #include "Array.hpp"
 #include "Values.hpp"
-#include "Position.hpp"
 #include "Colors.hpp"
 #include "Inline.hpp"
 #include "Display.hpp"
+
+
+#include "Eagle/Position.hpp"
+
 
 
 enum SPIRAL_DRAWING_OPTION {
@@ -90,6 +93,7 @@ public :
    void SetTransformParameters(double cx , double cy , double sx , double sy , double rotate_degrees);
 
    void Refresh();
+   void RefreshColors();
 
 };
 
@@ -126,21 +130,22 @@ private :
    Value rhombus_y_scale_value;
    Value rhombus_diag_scale_value;
 
-   ///
+   /// Colorset
    Colorset colorset;
    Value colorset_cycle_value;
-   
-///   Value colorset_index_value;
-   
+   bool color_cycle;
+      
    /// Spirals
    Spiral2D spiral1;
    Spiral2D spiral2;
    
    bool needs_refresh;
+   
+   /// Fix the empty hole in the center
    bool fix_the_center;
    
 
-
+   /// Generate the spiral data on demand
    void GenerateSpiralData();
 
 public :
@@ -166,6 +171,7 @@ public :
          rhombus_diag_scale_value(),
          colorset(),
          colorset_cycle_value(),
+         color_cycle(true),
          spiral1(),
          spiral2(),
          needs_refresh(true),
@@ -207,6 +213,19 @@ public :
    Value& RhombusXScaleValue();
    Value& RhombusYScaleValue();
    Value& RhombusDiagScaleValue();
+      
+   Value& ColorIndexStartValue();
+   Value& ColorCycleRate();
+
+   Value& NumColors() {return colorset.NumColors();}
+   Value& NumShades() {return colorset.NumShades();}
+   
+   void FlipColors(bool flip);
+   
+   void CycleColors(bool cycle);
+   bool ColorCycle() {return color_cycle;}
+
+   void FixTheCenter(bool fix);
    
    void Reset();
 
@@ -273,6 +292,10 @@ public :
 
    void Refresh();
 
+   void RefreshColors();
+   
+   bool Flip() {return colorset.Flip();}
+   
 };
 
 

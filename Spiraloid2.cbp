@@ -57,11 +57,13 @@
 					<Add option="-lvorbisfile" />
 					<Add option="-lvorbis" />
 					<Add option="-lfreetype" />
+					<Add option="-lphysfs" />
 					<Add option="-logg" />
 					<Add option="-lpng16" />
 					<Add option="-lzlibstatic" />
 					<Add option="-lgdiplus" />
 					<Add option="-luuid" />
+					<Add option="-ldsound" />
 					<Add option="-lkernel32" />
 					<Add option="-lwinmm" />
 					<Add option="-lpsapi" />
@@ -94,6 +96,7 @@
 					<Add option="-lEagle" />
 					<Add option="-lallegro_monolith-static" />
 					<Add option="-ldumb" />
+					<Add option="-lphysfs" />
 					<Add option="-lwebp" />
 					<Add option="-lFLAC" />
 					<Add option="-lvorbisfile" />
@@ -104,6 +107,7 @@
 					<Add option="-lzlibstatic" />
 					<Add option="-lgdiplus" />
 					<Add option="-luuid" />
+					<Add option="-ldsound" />
 					<Add option="-lkernel32" />
 					<Add option="-lwinmm" />
 					<Add option="-lpsapi" />
@@ -136,6 +140,7 @@
 		<Linker>
 			<Add directory="E:/usr/lib" />
 		</Linker>
+		<Unit filename="ShadedShapesKeys.txt" />
 		<Unit filename="src/Array.hpp" />
 		<Unit filename="src/ArrayImplementation.cpp" />
 		<Unit filename="src/Colors.cpp" />
@@ -152,15 +157,15 @@
 		<Unit filename="src/Monitors.hpp" />
 		<Unit filename="src/PlotData.cpp" />
 		<Unit filename="src/PlotData.hpp" />
-		<Unit filename="src/Position.hpp" />
 		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/Program.hpp" />
+		<Unit filename="src/ProgramScreen.cpp" />
+		<Unit filename="src/ProgramScreen.hpp" />
 		<Unit filename="src/RefreshRate.hpp" />
 		<Unit filename="src/ResizeTestMain.cpp">
 			<Option link="0" />
 		</Unit>
 		<Unit filename="src/SignalHandling.cpp" />
-		<Unit filename="src/SignalHandling.hpp" />
 		<Unit filename="src/SpiraloidController.cpp" />
 		<Unit filename="src/SpiraloidController.hpp" />
 		<Unit filename="src/SpiraloidMain.cpp" />

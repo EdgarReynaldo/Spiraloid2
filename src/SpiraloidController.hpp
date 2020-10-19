@@ -7,46 +7,40 @@
 
 #include "Spirals.hpp"
 #include "Display.hpp"
+#include "Eagle.hpp"
 
-
-enum {
-   
-};
-
-class InputAction {
-   
-   
-   
-   
-};
 
 
 class SpiraloidController {
    
 private :
    Spiraloid* spiraloid;
-   bool* keys_down;
    bool fullscreen;
    bool redraw;
    bool clear_buffer;
    bool temp_clear;
-
+   bool paused;
+   bool fix_the_center;
+   double dt;
 public :
    
    SpiraloidController();
    ~SpiraloidController();
    
-   void SetKeyDownArray(bool* keys_down) {this->keys_down = keys_down;}
+   void SetRefresh(double dt);
+   
    void ResetSpiraloid();
    
    void SetSpiraloidTransform(double cx , double cy , double sx , double sy);
    
-   bool HandleInput(ALLEGRO_EVENT ev);
-   void Update(double dt);
+   bool HandleInput(EagleEvent ev);
+   void Update(double deltatime);
    void Draw();
    
    bool NeedsRedraw() {return redraw;}
 };
+
+
 
 #endif // SpiraloidController_HPP
 

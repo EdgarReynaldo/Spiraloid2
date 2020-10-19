@@ -4,7 +4,7 @@
 #ifndef Display_HPP
 #define Display_HPP
 
-#include "allegro5/allegro.h"
+#include "Eagle/backends/Allegro5Backend.hpp"
 
 
 #include <cmath>
@@ -13,9 +13,9 @@
 class Display {
    static int new_display_flags;
    
-
-   ALLEGRO_DISPLAY* display;
-   ALLEGRO_BITMAP* buffer;
+   Allegro5System* a5sys;
+   EagleGraphicsContext* win;
+   Allegro5Image* buffer;
    
    bool fs;
    int display_flags;
@@ -41,8 +41,9 @@ class Display {
 
 public :
 ///   Display();
-   Display() :
-         display(0),
+   Display(Allegro5System* sys) :
+         a5sys(sys),
+         win(0),
          buffer(0),
          fs(false),
          display_flags(0),
@@ -86,7 +87,7 @@ public :
    double H() {return fs?fsh:wh;}
    double Diag() {return sqrt(W()*W() + H()*H());}
    
-   operator ALLEGRO_DISPLAY*() {return display;}
+   operator EagleGraphicsContext*() {return win;}
 };
 
 #endif // Display_HPP
