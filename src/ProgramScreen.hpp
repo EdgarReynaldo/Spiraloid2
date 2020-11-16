@@ -20,7 +20,7 @@ public :
    
    virtual bool HandleEvent(EagleEvent ev)=0;
    virtual void Update(double dt)=0;
-   virtual void Draw()=0;
+   virtual void Draw(EagleGraphicsContext* win)=0;
    
    virtual bool NeedsRedraw()=0;
    virtual void ResetScreen()=0;

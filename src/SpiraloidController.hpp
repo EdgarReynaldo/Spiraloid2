@@ -35,9 +35,11 @@ public :
    
    bool HandleInput(EagleEvent ev);
    void Update(double deltatime);
-   void Draw();
+   void Draw(EagleGraphicsContext* win);
    
    bool NeedsRedraw() {return redraw;}
+   
+   Spiraloid* GetSpiraloid() {return spiraloid;}
 };
 
 

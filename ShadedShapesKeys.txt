@@ -1,0 +1,70 @@
+
+ESC - quit / leave menu
+
+F1-F12 by itself : Load memory setting 1 thru 12
+SHFT F1-F12      : Load file setting 1 thru 12
+CTRL SHFT F1-F12 : Save file setting 1 thru 12
+CTRL F1-F12      : Save memory setting 1 thru 12
+
+CTRL - Save
+NO CTRL - Load
+SHFT - To file
+NO SHFT - To memory
+
+CTRL Enter       : Change graphics mode, use mouse
+
+Enter            : Change colors, use mouse and UP and DOWN to change num shades, right click on color box to change num colors
+
+SHFT Enter       : Edit settings (enter key enters / leaves setting, up and down change value)
+
+ALT + Enter : stop motion
+
+CTRL + [SHFT] + TAB - Change drawing type
+
+[SHFT] + TAB - Change spiral drawing type
+
+NUMPAD
+4 - Decrease angle delta
+6 - Incresase angle delta
+
+1 - Rotate left
+3 - Rotate right
+CTRL 1 - Decrease rotation velocity
+CTRL 3 - Increase rotation velocity
+ALT 1 - Decrease rotation velocity by tenth
+ALT 3 - Increase rotation velocity by tenth
+
+2 - Decrease max theta (+CTRL faster , +ALT even faster)
+5 - Set halfway theta
+8 - Increase max theta (+CTRL faster , +ALT even faster)
+9 - Set max theta (draw over entire screen)
+
+/ - Decrease spiral width (+CTRL faster , +ALT even faster)
+* - Increase spiral width (+CTRL faster , +ALT even faster)
+
+- : Decrease user angle (+CTRL faster , +ALT slower)
++ : Increase user angle (+CTRL faster , +ALT slower)
+
+ALHPA KEYS
+a - clear screen
+i - toggle between redraw, timed redraw, and overdraw modes
+p - pause
+x - decrease color cycling
+v - increase color cycling
+z - decrease color cycle
+b - increase color cycle
+c - toggle color cycle direction
+f - toggle color set flipping
+g - GO! fastest speed drawing
+h - faster speed drawing
+j - less faster speed drawing
+k - less slower speed drawing
+l - slower speed drawing
+s - slowest speed drawing
+d - toggle display of number of elements drawn
+
+e - toggle 'center fix'
+
+r - reset something or other... ?
+
+

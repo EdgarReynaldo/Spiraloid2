@@ -59,6 +59,8 @@ public :
 
    Value& operator++(int);
    Value& operator--(int);
+   Value& operator++();
+   Value& operator--();
    
    
 };

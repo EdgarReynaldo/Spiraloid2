@@ -143,6 +143,10 @@
 		<Unit filename="ShadedShapesKeys.txt" />
 		<Unit filename="src/Array.hpp" />
 		<Unit filename="src/ArrayImplementation.cpp" />
+		<Unit filename="src/ColorPicker.cpp" />
+		<Unit filename="src/ColorPicker.hpp" />
+		<Unit filename="src/ColorScreen.cpp" />
+		<Unit filename="src/ColorScreen.hpp" />
 		<Unit filename="src/Colors.cpp" />
 		<Unit filename="src/Colors.hpp" />
 		<Unit filename="src/Display.cpp" />
@@ -173,6 +177,8 @@
 		<Unit filename="src/SpiraloidScreen.hpp" />
 		<Unit filename="src/Spirals.cpp" />
 		<Unit filename="src/Spirals.hpp" />
+		<Unit filename="src/TableLayout.cpp" />
+		<Unit filename="src/TableLayout.hpp" />
 		<Unit filename="src/Values.cpp" />
 		<Unit filename="src/Values.hpp" />
 		<Extensions />

@@ -2,7 +2,7 @@
 
 #include "Colors.hpp"
 
-
+#include "Eagle/backends/Allegro5/Allegro5Color.hpp"
 #include "allegro5/allegro_color.h"
 
 
@@ -89,8 +89,8 @@ void Colorset::RecalculateColors() {
       }
    }
    
-   color_index_start_value.SetValues(0 , 0 , total_num_colors*civ_factor - 1 , civ_exponent , true);
-   color_index_value.SetValues(0 , 0 , total_num_colors*civ_factor - 1 , civ_exponent , true);
+   color_index_start_value.SetValues(0 , 0 , total_num_colors - 1 , 0 , true);
+   color_index_value.SetValues(0 , 0 , total_num_colors -1 , 0 , true);
    
    needs_refresh = false;
 }
@@ -124,6 +124,47 @@ Colorset::Colorset() :
    memset(&colors , 0 , 12*sizeof(ALLEGRO_COLOR));
    
    SetRainbowColors();
+}
+
+
+
+Colorset::Colorset(const Colorset& cs) :
+      num_colors_value(cs.num_colors_value),
+      num_shades_value(cs.num_shades_value),
+      colorset(cs.colorset),
+      color_index_value(cs.color_index_value),
+      color_cycle_rate(cs.color_cycle_rate),
+      color_index_start_value(cs.color_index_start_value),
+      color_cycle_forward(cs.color_cycle_forward),
+      civ_factor(cs.civ_factor),
+      civ_exponent(cs.civ_exponent),
+      colors(),
+      flip_colors(cs.flip_colors),
+      needs_refresh(true)
+{
+   for (unsigned int i = 0 ; i < 12 ; ++i) {
+      this->colors[i] = cs.colors[i];
+   }
+}
+
+
+
+Colorset& Colorset::operator=(const Colorset& cs) {
+   this->num_colors_value = cs.num_colors_value;
+   this->num_shades_value = cs.num_shades_value;
+   this->colorset = cs.colorset;
+   this->color_index_value = cs.color_index_value;
+   this->color_cycle_rate = cs.color_cycle_rate;
+   this->color_index_start_value = cs.color_index_start_value;
+   this->color_cycle_forward = cs.color_cycle_forward;
+   this->civ_factor = cs.civ_factor;
+   this->civ_exponent = cs.civ_exponent;
+   for (unsigned int i = 0 ; i < 12 ; ++i) {
+      this->colors[i] = cs.colors[i];
+   }
+   this->flip_colors = cs.flip_colors;
+   this->needs_refresh = true;
+   return *this;
 }
 
 
@@ -165,7 +206,7 @@ void Colorset::SetColors(float* twelve_hsla_quartets) {
 
 void Colorset::FlipColors(bool flip) {
    flip_colors = flip;
-   needs_refresh = true;
+   Refresh();
 }
 
 
@@ -176,6 +217,16 @@ void Colorset::Update(double dt) {
 
 
 
+void Colorset::Refresh() {
+   needs_refresh = true;
+   RecalculateColors();
+}
 
 
 
+void Colorset::PrintColors2() {
+   ResetColorIndex();
+   for (unsigned int i = 0 ; i < colorset.Size() ; ++i) {
+      EagleInfo() << i << " " << ::GetEagleColor(GetNextColor()) << std::endl;
+   }
+}

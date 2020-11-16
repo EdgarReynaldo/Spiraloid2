@@ -354,7 +354,7 @@ void Spiraloid::Reset() {
    }
 ///      void DrawOption1(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
 
-void Spiraloid::Draw() {
+void Spiraloid::Draw(EagleGraphicsContext* win) {
 
    colorset.ResetColorIndex();
    switch (spiral_drawing_option_value.IVal()) {
@@ -380,38 +380,6 @@ void Spiraloid::Draw() {
 
 }
 
-
-
-void Spiraloid::Update(double dt) {
-   
-   double old_rotation = (double)rotation_degrees_value;
-   double new_rotation = old_rotation + (double)rotation_dps_value*dt;
-   if (new_rotation != old_rotation) {
-      needs_refresh = true;
-   }
-   rotation_degrees_value = new_rotation;
-
-   if (color_cycle) {
-      colorset.Update(dt);
-   }
-}
-
-
-
-void Spiraloid::Refresh() {
-   if (needs_refresh) {
-      GenerateSpiralData();
-      
-      needs_refresh = false;
-   }
-}
-
-
-
-void Spiraloid::RefreshColors() {
-   colorset.Refresh();
-   
-}
 
 
 
@@ -490,4 +458,46 @@ void Spiraloid::DrawOption7(double x1 , double y1 , double x2 , double y2 , ALLE
    (void)y2;
    (void)col;
 }
+
+
+
+void Spiraloid::Update(double dt) {
+   
+   double old_rotation = (double)rotation_degrees_value;
+   double new_rotation = old_rotation + (double)rotation_dps_value*dt;
+   if (new_rotation != old_rotation) {
+      needs_refresh = true;
+   }
+   rotation_degrees_value = new_rotation;
+
+   if (color_cycle) {
+      colorset.Update(dt);
+   }
+}
+
+
+
+void Spiraloid::Refresh() {
+   if (needs_refresh) {
+      GenerateSpiralData();
+      
+      needs_refresh = false;
+   }
+}
+
+
+
+void Spiraloid::RefreshColors() {
+   colorset.Refresh();
+}
+
+
+
+bool Spiraloid::Flip() {
+   return colorset.Flip();
+}
+
+
+
+
 

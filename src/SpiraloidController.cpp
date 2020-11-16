@@ -232,11 +232,11 @@ bool SpiraloidController::HandleInput(EagleEvent ev) {
       }
       
       if (keydown[EAGLE_KEY_UP]) {
-         spiraloid->NumShades() += modifier;
+         spiraloid->NumShades() += 1;
          spiraloid->RefreshColors();
       }
       if (keydown[EAGLE_KEY_DOWN]) {
-         spiraloid->NumShades() -= modifier;
+         spiraloid->NumShades() -= 1;
          spiraloid->RefreshColors();
       }
       if (keydown[EAGLE_KEY_PAD_SLASH]) {
@@ -265,14 +265,14 @@ void SpiraloidController::Update(double deltatime) {
 
 
 
-void SpiraloidController::Draw() {
+void SpiraloidController::Draw(EagleGraphicsContext* win) {
    spiraloid->Refresh();
    if (redraw) {
       if (clear_buffer || temp_clear) {
-         al_clear_to_color(al_map_rgb(0,0,255));
+         al_clear_to_color(al_map_rgb(spiraloid->bg_red , spiraloid->bg_green , spiraloid->bg_blue));
          temp_clear = false;
       }
-      spiraloid->Draw();
+      spiraloid->Draw(win);
       
       redraw = false;
    }

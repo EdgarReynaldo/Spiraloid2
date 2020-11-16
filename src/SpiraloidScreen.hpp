@@ -26,12 +26,14 @@ public :
    
    virtual bool HandleEvent(EagleEvent ev);
    virtual void Update(double dt);
-   virtual void Draw();
+   virtual void Draw(EagleGraphicsContext* win);
 
    virtual bool NeedsRedraw();
    virtual void ResetScreen();
 
    void SetSpiraloidTransform(double cx , double cy , double sx , double sy);
+   
+   Spiraloid* GetSpiraloid() {return spiraloid_controller.GetSpiraloid();}
 };
 
 

@@ -21,9 +21,8 @@ int main(int argc , char** argv) {
 
    Program proggie;
    
-   int ret = proggie.Init();
-   if (ret != 0) {
-      return ret;
+   if (proggie.InitState() != 0) {
+      return proggie.InitState();
    }
 
    proggie.Run();

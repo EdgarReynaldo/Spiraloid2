@@ -292,5 +292,16 @@ Value& Value::operator--(int) {
 
 
 
+Value& Value::operator++() {
+   Increment(1,exponent);
+   return *this;
+}
+
+
+
+Value& Value::operator--() {
+   Decrement(1,exponent);
+   return *this;
+}
 
 

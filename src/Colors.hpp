@@ -38,17 +38,14 @@ private :
    bool needs_refresh;
    
    
-   
-
-   Colorset(const Colorset& cs) {(void)cs;}
-   Colorset& operator=(const Colorset& cs) {(void)cs;return *this;}
-   
-      
 public :
-   void RecalculateColors();
+   
+  void RecalculateColors();
 
    Colorset();
-   
+   Colorset(const Colorset& cs);
+   Colorset& operator=(const Colorset& cs);
+
    void SetRainbowColors();
    
    void SetColors(float* twelve_hsl_quartets);
@@ -65,14 +62,38 @@ public :
    
    void ResetColorIndex() {color_index_value.SetValue((double)color_index_start_value);}
    
+//   INLINE ALLEGRO_COLOR& Color(unsigned int index);
+   INLINE ALLEGRO_COLOR& Color(unsigned int index) {
+      EAGLE_ASSERT(index < 12);
+      return colors[index];
+      needs_refresh = true;
+   }
+   
+//   INLINE const ALLEGRO_COLOR& GetMainColor(unsigned int index);
+   INLINE const ALLEGRO_COLOR& GetMainColor(unsigned int index) {
+      EAGLE_ASSERT(index < 12);
+      return colors[index];
+   }
+   
    INLINE const ALLEGRO_COLOR& GetNextColor() {
       return colorset[(unsigned int)(double)(color_index_value++)];
    }
    INLINE unsigned int Size() {return colorset.Size();}
    
-   INLINE void Refresh() {RecalculateColors();}
+   void Refresh();
    
    void Update(double dt);
+   
+//   void PrintColors();
+   void PrintColors() {
+      for (unsigned int i = 0 ; i < colorset.Size() ; ++i) {
+         unsigned char r,g,b,a;
+         al_unmap_rgba(colorset[i] , &r , &g , &b , &a);
+         EagleInfo() << i << " " << (int)r << "," << (int)g << "," << (int)b << "," << (int)a << std::endl;
+      }
+   }
+   
+   void PrintColors2();
 };
 
 

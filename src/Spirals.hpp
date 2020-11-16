@@ -93,7 +93,6 @@ public :
    void SetTransformParameters(double cx , double cy , double sx , double sy , double rotate_degrees);
 
    void Refresh();
-   void RefreshColors();
 
 };
 
@@ -130,11 +129,17 @@ private :
    Value rhombus_y_scale_value;
    Value rhombus_diag_scale_value;
 
+public :
    /// Colorset
    Colorset colorset;
    Value colorset_cycle_value;
    bool color_cycle;
-      
+
+   int bg_red;
+   int bg_green;
+   int bg_blue;
+private:
+         
    /// Spirals
    Spiral2D spiral1;
    Spiral2D spiral2;
@@ -172,6 +177,9 @@ public :
          colorset(),
          colorset_cycle_value(),
          color_cycle(true),
+         bg_red(0),
+         bg_green(0),
+         bg_blue(0),
          spiral1(),
          spiral2(),
          needs_refresh(true),
@@ -229,7 +237,7 @@ public :
    
    void Reset();
 
-   void Draw();
+   void Draw(EagleGraphicsContext* win);
 
 private :
    
@@ -294,7 +302,7 @@ public :
 
    void RefreshColors();
    
-   bool Flip() {return colorset.Flip();}
+   bool Flip();
    
 };
 

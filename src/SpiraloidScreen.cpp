@@ -38,8 +38,8 @@ void SpiraloidScreen::Update(double dt) {
 
 
 
-void SpiraloidScreen::Draw() {
-   spiraloid_controller.Draw();
+void SpiraloidScreen::Draw(EagleGraphicsContext* win) {
+   spiraloid_controller.Draw(win);
 }
 
 

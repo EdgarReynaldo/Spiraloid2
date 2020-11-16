@@ -87,7 +87,7 @@ public :
    double H() {return fs?fsh:wh;}
    double Diag() {return sqrt(W()*W() + H()*H());}
    
-   operator EagleGraphicsContext*() {return win;}
+   EagleGraphicsContext* GetWindow() {return win;}
 };
 
 #endif // Display_HPP
