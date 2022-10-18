@@ -1,0 +1,24 @@
+
+
+
+
+
+/**
+TODO : 
+
+1. Add resolution changing
+
+2. Add color arrays
+
+3. Add spiral options
+
+4. Add in Recorder and Playback functionality.
+
+5. Move input into Spiraloid (Spiraloid Controller class)
+
+6. Utilize class function pointers to the Value class objects in the Spiraloid to control the adjustments.
+
+
+*/
+
+
