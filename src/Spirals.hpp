@@ -210,7 +210,7 @@ public :
    
    void Reset();
 
-   void Draw();
+   void Draw(EagleGraphicsContext* win);
 
 private :
    

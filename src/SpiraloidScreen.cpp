@@ -4,14 +4,6 @@
 
 
 
-void SpiraloidScreen::SetKeyDownArray(bool* keys_down) {
-   ProgramScreen::SetKeyDownArray(keys_down);
-   this->keys_down = keys_down;
-   spiraloid_controller.SetKeyDownArray(keys_down);
-}
-
-
-
 bool SpiraloidScreen::Init() {
    ResetScreen();
    return true;
@@ -19,7 +11,7 @@ bool SpiraloidScreen::Init() {
 
 
 
-bool SpiraloidScreen::HandleEvent(ALLEGRO_EVENT ev) {
+bool SpiraloidScreen::HandleEvent(EagleEvent ev) {
    return spiraloid_controller.HandleInput(ev);
 }
 
@@ -31,8 +23,8 @@ void SpiraloidScreen::Update(double dt) {
 
 
 
-void SpiraloidScreen::Draw() {
-   spiraloid_controller.Draw();
+void SpiraloidScreen::Draw(EagleGraphicsContext* win) {
+   spiraloid_controller.Draw(win);
 }
 
 

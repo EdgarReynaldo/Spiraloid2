@@ -24,13 +24,11 @@ public :
          spiraloid_controller()
    {}
    
-   virtual void SetKeyDownArray(bool* keys_down);
-
    virtual bool Init();
    
-   virtual bool HandleEvent(ALLEGRO_EVENT ev);
+   virtual bool HandleEvent(EagleEvent ev);
    virtual void Update(double dt);
-   virtual void Draw();
+   virtual void Draw(EagleGraphicsContext* win);
 
    virtual bool NeedsRedraw();
    virtual void ResetScreen();

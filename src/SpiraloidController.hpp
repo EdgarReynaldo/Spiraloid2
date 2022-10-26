@@ -6,26 +6,16 @@
 
 
 #include "Spirals.hpp"
-#include "Display.hpp"
+#include "NewDisplay.hpp"
 
 
-enum {
-   
-};
-
-class InputAction {
-   
-   
-   
-   
-};
+#include "Eagle/Events.hpp"
 
 
 class SpiraloidController {
    
 private :
    Spiraloid* spiraloid;
-   bool* keys_down;
    bool fullscreen;
    bool redraw;
    bool clear_buffer;
@@ -36,14 +26,13 @@ public :
    SpiraloidController();
    ~SpiraloidController();
    
-   void SetKeyDownArray(bool* keys_down) {this->keys_down = keys_down;}
    void ResetSpiraloid();
    
    void SetSpiraloidTransform(double cx , double cy , double sx , double sy);
    
-   bool HandleInput(ALLEGRO_EVENT ev);
+   bool HandleInput(EagleEvent ev);
    void Update(double dt);
-   void Draw();
+   void Draw(EagleGraphicsContext* win);
    
    bool NeedsRedraw() {return redraw;}
 };

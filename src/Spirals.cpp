@@ -314,7 +314,7 @@ void Spiraloid::Reset() {
    }
 ///      void DrawOption1(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
 
-void Spiraloid::Draw() {
+void Spiraloid::Draw(EagleGraphicsContext* win) {
 
    colorset.ResetColorIndex();
    switch (spiral_drawing_option_value.IVal()) {
