@@ -15,6 +15,10 @@ class EagleGraphicsContext;
 #include "Monitors.hpp"
 #include "Eagle/ConfigFile.hpp"
 
+void AllegroLogHandler(const char* text);
+void AllegroLogHandler(const char* text) {
+   EagleInfo() << text << std::endl;
+}
 
 
 class NewProgram {

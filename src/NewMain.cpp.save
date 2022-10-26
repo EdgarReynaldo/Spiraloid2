@@ -1,9 +1,14 @@
 
 
 
-#include "NewProgram.hpp"
 
-#include "Eagle/Logging.hpp"
+#include "Eagle/Eagle/backends/Allegro5.hpp"
+
+#include "Eagle.hpp"
+
+#include "SpiraloidConfig.hpp"
+
+#include <cstdlib>
 
 
 int main(int argc , char** argv) {
@@ -16,7 +21,7 @@ int main(int argc , char** argv) {
    bool init = proggie.Init();
    
    if (!init) {
-      EagleCritical() << "Failed to initialize spiraloid program. Halting." << std::endl;
+      EagleError() << "Failed to initialize spiraloid program. Halting." << std::endl;
       return 1;
    }
    

@@ -10,6 +10,8 @@
 
 #include "allegro5/allegro_primitives.h"
 
+#include "Eagle/Exception.hpp"
+
 
 
 void Spiral2D::GeneratePlotData() {
@@ -18,7 +20,7 @@ void Spiral2D::GeneratePlotData() {
       double num_data = (theta_stop - theta_start)/theta_delta;
       num_data = ceil(num_data);
       
-      Assert(num_data >= 1.0);
+      EAGLE_ASSERT(num_data >= 1.0);
       
       unsigned int data_size = (unsigned int)num_data;
       
@@ -49,13 +51,13 @@ void Spiral2D::GeneratePlotData() {
 void Spiral2D::SetSpiralParameters(double rdelta , double tstart , double tstop , double tdelta) {
    /// Check parameters here...
    if (rdelta <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : rdelta non-positive!\n");
+      throw EagleException("void Spiral2D::SetParameters(...) : rdelta non-positive!\n");
    }
    if ((tstop - tstart) <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : theta range non-positive!\n");
+      throw EagleException("void Spiral2D::SetParameters(...) : theta range non-positive!\n");
    }
    if (tdelta <= 0.0) {
-      throw Exception("void Spiral2D::SetParameters(...) : tdelta non-positive!\n");
+      throw EagleException("void Spiral2D::SetParameters(...) : tdelta non-positive!\n");
    }
 
    if (rdelta != radial_delta ||

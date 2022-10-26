@@ -35,7 +35,9 @@ bool NewProgram::Init() {
    int sysret = sys->Initialize(EAGLE_FULL_SETUP);
    
    EAGLE_ASSERT(sysret & EAGLE_STANDARD_SETUP);
-   
+
+   al_register_trace_handler(AllegroLogHandler);
+      
    gconfig = &config;
    
    if (!config.Setup("Graphics.cfg")) {

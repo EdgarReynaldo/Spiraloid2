@@ -2,11 +2,13 @@
 
 
 #include "Values.hpp"
-#include "SignalHandling.hpp"
+//#include "SignalHandling.hpp"
 
 
 #include <cmath>
 #include <cstdio>
+
+#include "Eagle/Exception.hpp"
 
 
 
@@ -25,7 +27,7 @@ void Value::FixDRange() {
          double extra = (double)(int)((dmax - dval)/drange);
          dval += extra*drange;
       }
-      Assert(dval < dmax && dval >= dmin);
+      EAGLE_ASSERT(dval < dmax && dval >= dmin);
    }
    else {/// clamp values
       if (dval > dmax) {dval = dmax;}
@@ -41,12 +43,12 @@ void Value::FixIRange() {
       long long range = 1 + vmax - vmin;
       if (ival > vmax) {
          int extra = (int)((ival - vmin)/range);
-         Assert(extra);
+         EAGLE_ASSERT(extra);
          ival -= extra*range;
       }
       else if (ival < vmin) {
          int extra = (int)((vmax - ival)/range);
-         Assert(extra);
+         EAGLE_ASSERT(extra);
          ival += extra*range;
       }
    }

@@ -7,7 +7,7 @@
 #include "allegro5/allegro.h"
 
 #include "Eagle/StringWork.hpp"
-
+#include "Eagle/Exception.hpp"
 
 ///Array<ALLEGRO_COLOR> fake_array;
 
@@ -30,9 +30,9 @@ Array<DATA_TYPE>::~Array()
 
 
 template <class DATA_TYPE>
-DATA_TYPE& Array<DATA_TYPE>::DataChecked(unsigned int index) throw(Exception) {
+DATA_TYPE& Array<DATA_TYPE>::DataChecked(unsigned int index) throw(EagleException) {
    if (index >= data_array.size()) {
-      throw Exception(StringPrintF("Array<DATA_TYPE>::DataChecked() - index %u out of bounds (%u)\n" , index , data_array.size()));
+      throw EagleException(StringPrintF("Array<DATA_TYPE>::DataChecked() - index %u out of bounds (%u)\n" , index , data_array.size()));
    }
    return DataUnchecked(index);
 }
