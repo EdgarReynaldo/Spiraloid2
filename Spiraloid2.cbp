@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="e:/usr/bin/Spiraloid2D" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="e:/usr/bin" />
+				<Option output="Spiraloid2D" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="./" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,14 +17,14 @@
 					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add option="-lEagleA5Debug" />
-					<Add option="-lEagleDebug" />
+					<Add option="-lEagleA5DebugShared.dll" />
+					<Add option="-lEagleDebugShared.dll" />
 					<Add option="-lallegro_monolith-debug.dll" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="e:/usr/bin/Spiraloid2" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="e:/usr/bin" />
+				<Option output="Spiraloid2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="./" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -32,14 +32,14 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
-					<Add option="-lEagleA5" />
-					<Add option="-lEagle" />
+					<Add option="-lEagleA5.dll" />
+					<Add option="-lEagle.dll" />
 					<Add option="-lallegro_monolith.dll" />
 				</Linker>
 			</Target>
 			<Target title="StaticDebug">
-				<Option output="e:/usr/bin/Spiraloid2DS" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="e:/usr/bin" />
+				<Option output="Spiraloid2DS" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="./" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -52,6 +52,8 @@
 					<Add option="-lEagleDebug" />
 					<Add option="-lallegro_monolith-static" />
 					<Add option="-ldumb" />
+					<Add option="-lphysfs" />
+					<Add option="-lOpenAL32" />
 					<Add option="-lwebp" />
 					<Add option="-lFLAC" />
 					<Add option="-lvorbisfile" />
@@ -81,8 +83,8 @@
 				</Linker>
 			</Target>
 			<Target title="StaticRelease">
-				<Option output="e:/usr/bin/Spiraloid2S" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="e:/usr/bin" />
+				<Option output="Spiraloid2S" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="./" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -94,6 +96,8 @@
 					<Add option="-lEagle" />
 					<Add option="-lallegro_monolith-static" />
 					<Add option="-ldumb" />
+					<Add option="-lphysfs" />
+					<Add option="-lOpenAL32" />
 					<Add option="-lwebp" />
 					<Add option="-lFLAC" />
 					<Add option="-lvorbisfile" />
@@ -131,10 +135,10 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="E:/usr/include" />
+			<Add directory="E:/usr64/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="E:/usr/lib" />
+			<Add directory="E:/usr64/lib" />
 		</Linker>
 		<Unit filename="src/Array.hpp" />
 		<Unit filename="src/ArrayImplementation.cpp" />
@@ -150,6 +154,11 @@
 		</Unit>
 		<Unit filename="src/Monitors.cpp" />
 		<Unit filename="src/Monitors.hpp" />
+		<Unit filename="src/NewDisplay.cpp" />
+		<Unit filename="src/NewDisplay.hpp" />
+		<Unit filename="src/NewMain.cpp" />
+		<Unit filename="src/NewProgram.cpp" />
+		<Unit filename="src/NewProgram.hpp" />
 		<Unit filename="src/PlotData.cpp" />
 		<Unit filename="src/PlotData.hpp" />
 		<Unit filename="src/Position.hpp" />
@@ -161,6 +170,8 @@
 		</Unit>
 		<Unit filename="src/SignalHandling.cpp" />
 		<Unit filename="src/SignalHandling.hpp" />
+		<Unit filename="src/SpiraloidConfig.cpp" />
+		<Unit filename="src/SpiraloidConfig.hpp" />
 		<Unit filename="src/SpiraloidController.cpp" />
 		<Unit filename="src/SpiraloidController.hpp" />
 		<Unit filename="src/SpiraloidMain.cpp" />
