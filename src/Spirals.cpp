@@ -110,11 +110,11 @@ void Spiral2D::Refresh() {
       for (unsigned int i = 0 ; i < Size() ; ++i) {
          Pos2D mod = DataOriginal(i);
          /// TODO : This is a hack
-         float x = mod.x;
-         float y = mod.y;
+         float x = mod.tx;
+         float y = mod.ty;
          al_transform_coordinates(&transform , &x , &y);
-         mod.x = x;
-         mod.y = y;
+         mod.tx = x;
+         mod.ty = y;
          DataModified(i) = mod;
       }
       transform_needs_refresh = false;
@@ -307,17 +307,17 @@ void Spiraloid::Reset() {
    for (unsigned int i = 0 ; i < spiral1.Size() ; ++i) { \
       Pos2D sp1 = spiral1.DataModified(i); \
       Pos2D sp2 = spiral2.DataModified(i); \
-      double x1 = sp1.x; \
-      double y1 = sp1.y; \
-      double x2 = sp2.x; \
-      double y2 = sp2.y; \
+      double x1 = sp1.tx; \
+      double y1 = sp1.ty; \
+      double x2 = sp2.tx; \
+      double y2 = sp2.ty; \
       ALLEGRO_COLOR c = colorset.GetNextColor();\
       draw_func(x1,y1,x2,y2,c); \
    }
 ///      void DrawOption1(double x1 , double y1 , double x2 , double y2 , ALLEGRO_COLOR col);
 
 void Spiraloid::Draw(EagleGraphicsContext* win) {
-
+   (void)win;
    colorset.ResetColorIndex();
    switch (spiral_drawing_option_value.IVal()) {
    case 1 :

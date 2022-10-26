@@ -12,10 +12,10 @@
 
 #include "Array.hpp"
 #include "Values.hpp"
-#include "Position.hpp"
+#include "Eagle/Position.hpp"
 #include "Colors.hpp"
 #include "Inline.hpp"
-#include "Display.hpp"
+#include "NewDisplay.hpp"
 
 
 enum SPIRAL_DRAWING_OPTION {

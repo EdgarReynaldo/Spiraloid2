@@ -1,11 +1,16 @@
 
 
 
-#include "Program.hpp"
+#include "NewProgram.hpp"
 
 #include "Eagle/StringWork.hpp"
+#include "Eagle/backends/Allegro5/Allegro5System.hpp"
+#include "Eagle.hpp"
 
 
+void AllegroLogHandler(const char* text) {
+   EagleInfo() << text << std::endl;
+}
 
 
 NewProgram::NewProgram() :
@@ -14,7 +19,7 @@ NewProgram::NewProgram() :
       config(),
       minfo(),
       display(),
-      spiraloid_screen(0),
+      spiraloid_screen(),
       screens(),
       active_screen(0),
       fullscreen(false),
@@ -38,8 +43,6 @@ bool NewProgram::Init() {
 
    al_register_trace_handler(AllegroLogHandler);
       
-   gconfig = &config;
-   
    if (!config.Setup("Graphics.cfg")) {
       EagleError() << "Failed to setup spiraloid config!" << std::endl;
       return false;
@@ -56,8 +59,7 @@ bool NewProgram::Init() {
    win = display.GetDisplay();
    win->Clear(EagleColor(255,255,255));
    win->FlipDisplay();
-   
-}
+
    for (int i = 0 ; i < NUM_SCREENS ; ++i) {
       ProgramScreen* pscreen = screens[i];
       pscreen->Init();
@@ -73,7 +75,7 @@ bool NewProgram::Init() {
    
    
    
-void NewProgram::Run() {
+int NewProgram::Run() {
 
    sys->GetSystemTimer()->Start();
 
@@ -129,7 +131,7 @@ void NewProgram::Run() {
       } while (!sys->UpToDate());
       
    } while (!quit);
-   
+   return 0;
 }
 
 

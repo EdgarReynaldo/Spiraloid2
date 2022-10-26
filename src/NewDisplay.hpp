@@ -8,14 +8,18 @@
 
 
 #include <cmath>
+#include <string>
+
+
 
 class EagleSystem;
 class Allegro5GraphicsContext;
+class EagleGraphicsContext;
 class EagleImage;
 
 
 
-class Display {
+class NewDisplay {
    
    EagleSystem* sys;
    Allegro5GraphicsContext* win;
@@ -39,14 +43,14 @@ class Display {
    int monitor_num;
    std::string textbuf;
 
-   bool CreateWindowed(int wwidth , int wheight);
-   bool CreateFullScreen(int fswidth , int fsheight);
+   bool CreateWindowed(int wwidth , int wheight , int newflags);
+   bool CreateFullScreen(int fswidth , int fsheight , int newflags);
 
    void DestroyBuffer();
 
 public :
 ///   Display();
-   Display() :
+   NewDisplay() :
          sys(0),
          win(0),
          buf(0),
@@ -68,7 +72,7 @@ public :
    {
    }
    
-   ~Display();
+   ~NewDisplay();
    
    void Destroy();
 
@@ -92,7 +96,7 @@ public :
    double H() {return fs?fsh:wh;}
    double Diag() {return sqrt(W()*W() + H()*H());}
    
-   EagleGraphicsContext* GetDisplay() {return win;}
+   EagleGraphicsContext* GetDisplay();
 };
 
 #endif // Display_HPP

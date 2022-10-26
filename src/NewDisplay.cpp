@@ -1,11 +1,14 @@
 
 
-#include "Display.hpp"
+#include "NewDisplay.hpp"
 
 
 #include <cstdio>
 
-#include "allegro5/allegro_direct3d.h"
+#include "Eagle/backends/Allegro5Backend.hpp"
+#include "Eagle/Exception.hpp"
+#include "Eagle/Image.hpp"
+#include "Eagle/StringWork.hpp"
 
 
 
@@ -14,13 +17,13 @@
 
 
 
-bool Display::CreateWindowed(int wwidth , int wheight , int newflags) {
+bool NewDisplay::CreateWindowed(int wwidth , int wheight , int newflags) {
    Destroy();
    fs = false;
    ww = wwidth;
    wh = wheight;
    flags = newflags | ALLEGRO_RESIZABLE | ALLEGRO_WINDOWED;// | ALLEGRO_NOFRAME;
-   win = sys->CreateGraphicsContext("Spirloid" , ww , wh , flags);
+   win = dynamic_cast<Allegro5GraphicsContext*>(sys->CreateGraphicsContext("Spirloid" , ww , wh , flags));
    EAGLE_ASSERT(win && win->Valid());
 
    return CreateBuffer(ww,wh);
@@ -28,13 +31,13 @@ bool Display::CreateWindowed(int wwidth , int wheight , int newflags) {
 
 
 
-bool Display::CreateFullScreen(int fswidth , int fsheight , int newflags) {
+bool NewDisplay::CreateFullScreen(int fswidth , int fsheight , int newflags) {
    Destroy();
    fs = true;
    fsw = fswidth;
    fsh = fsheight;
    flags = newflags | ALLEGRO_FULLSCREEN_WINDOW;
-   win = sys->CreateGraphicsContext("Spiraloid" , fsw , fsh , flags);
+   win = dynamic_cast<Allegro5GraphicsContext*>(sys->CreateGraphicsContext("Spiraloid" , fsw , fsh , flags));
    EAGLE_ASSERT(win && win->Valid());
    
    return CreateBuffer(fsw,fsh);
@@ -42,7 +45,7 @@ bool Display::CreateFullScreen(int fswidth , int fsheight , int newflags) {
 
 
 
-void Display::DestroyBuffer() {
+void NewDisplay::DestroyBuffer() {
    if (buf) {
       win->FreeImage(buf);
       buf = 0;
@@ -51,13 +54,13 @@ void Display::DestroyBuffer() {
 
 
 
-Display::~Display() {
+NewDisplay::~NewDisplay() {
    Destroy();
 }
 
 
 
-void Display::Destroy() {
+void NewDisplay::Destroy() {
    DestroyBuffer();
    if (win) {
       sys->FreeGraphicsContext(win);
@@ -67,7 +70,7 @@ void Display::Destroy() {
 
 
 
-bool Display::Create(EagleSystem* system , bool fullscreen , int fswidth , int fsheight , int wwidth , int wheight , int flags) {
+bool NewDisplay::Create(EagleSystem* system , bool fullscreen , int fswidth , int fsheight , int wwidth , int wheight , int flags) {
    EAGLE_ASSERT(system);
    sys = system;
    fsw = fswidth;
@@ -84,7 +87,7 @@ bool Display::Create(EagleSystem* system , bool fullscreen , int fswidth , int f
 
 
 
-bool Display::CreateBuffer(int bwidth , int bheight) {
+bool NewDisplay::CreateBuffer(int bwidth , int bheight) {
    EAGLE_ASSERT(win);
    
    if (bwidth != bw || bheight != bh) {
@@ -106,8 +109,8 @@ bool Display::CreateBuffer(int bwidth , int bheight) {
 
 
 
-void Display::AcknowledgeResize() {
-   win->AcknowedgeResize();
+void NewDisplay::AcknowledgeResize() {
+   win->AcknowledgeResize();
    
    if (!fs) {
       ww = win->Width();
@@ -118,41 +121,39 @@ void Display::AcknowledgeResize() {
 
 
 
-bool Display::ToggleFullscreen() {
-   return Create(!fs , fsw , fsh , ww , wh , flags);
+bool NewDisplay::ToggleFullscreen() {
+   return Create(sys , !fs , fsw , fsh , ww , wh , flags);
 }
 
 
 
-void Display::DrawToBuffer() {
-   win->DrawTo(buf);
+void NewDisplay::DrawToBuffer() {
+   win->SetDrawingTarget(buf);
 }
 
 
 
-void Display::Flip() {
-   win->DrawToBackbuffer();
-   win->DrawScaled(buf , 0 , 0 , bw , bh , 0 , 0 , fs?fsw:ww , fs?fsh:wh);
+void NewDisplay::Flip() {
+   win->DrawToBackBuffer();
+   win->DrawStretched(buf , Rectangle(0 , 0 , fs?fsw:ww , fs?fsh:wh));
    win->FlipDisplay();
 }
 
 
 
-bool Display::SaveScreenie() {
+bool NewDisplay::SaveScreenie() {
    do {
       textbuf = StringPrintF("Screenie%d.png" , screenie_num++);
    } while (al_filename_exists(textbuf.c_str()));
-   bool ret = win->SaveImage(buf);
+   bool ret = win->SaveImage(buf , textbuf);
    return ret;
 }
 
 
 
-operator ALLEGRO_DISPLAY*() {
-   if (!win) {return 0;}
-   return win->GetAllegroDisplay();
+EagleGraphicsContext* NewDisplay::GetDisplay() {
+   return dynamic_cast<EagleGraphicsContext*>(win);
 }
-
 
 
 

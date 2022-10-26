@@ -14,8 +14,8 @@ Pos2D SpiralEquation2D::Evaluate(double theta) {
    const double radians = radian_percent*2.0*M_PI;
    const double radius = radial_delta*radian_percent;
    Pos2D p;
-   p.x = radius*cos(radians);
-   p.y = radius*sin(radians);
+   p.tx = radius*cos(radians);
+   p.ty = radius*sin(radians);
    return p;
 }
 

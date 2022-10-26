@@ -9,16 +9,13 @@
 class Allegro5System;
 class EagleGraphicsContext;
 
-#include "Eagle/Config.hpp"
 
 #include "NewDisplay.hpp"
 #include "Monitors.hpp"
+#include "SpiraloidScreen.hpp"
 #include "Eagle/ConfigFile.hpp"
 
 void AllegroLogHandler(const char* text);
-void AllegroLogHandler(const char* text) {
-   EagleInfo() << text << std::endl;
-}
 
 
 class NewProgram {
@@ -45,7 +42,7 @@ public :
    
    NewProgram();
    bool Init();
-   
+   int Run();
 };
 
 #endif // NewProgram_HPP

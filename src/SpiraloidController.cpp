@@ -6,8 +6,8 @@
 
 #include "Eagle/InputHandler.hpp"
 
-
-
+#include "Eagle/GraphicsContext.hpp"
+#include "Eagle/Color.hpp"
 
 
 SpiraloidController::SpiraloidController() :
@@ -186,7 +186,7 @@ void SpiraloidController::Draw(EagleGraphicsContext* win) {
    spiraloid->Refresh();
    if (redraw) {
       if (clear_buffer || temp_clear) {
-         win->Clear(EagleColor(0,0,255);
+         win->Clear(EagleColor(0,0,255));
          temp_clear = false;
       }
       spiraloid->Draw(win);

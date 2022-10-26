@@ -1,7 +1,7 @@
 
 
 #include "Array.hpp"
-#include "Position.hpp"
+#include "Eagle/Position.hpp"
 
 
 #include "allegro5/allegro.h"
@@ -30,9 +30,9 @@ Array<DATA_TYPE>::~Array()
 
 
 template <class DATA_TYPE>
-DATA_TYPE& Array<DATA_TYPE>::DataChecked(unsigned int index) throw(EagleException) {
+DATA_TYPE& Array<DATA_TYPE>::DataChecked(unsigned int index) {
    if (index >= data_array.size()) {
-      throw EagleException(StringPrintF("Array<DATA_TYPE>::DataChecked() - index %u out of bounds (%u)\n" , index , data_array.size()));
+      throw EagleException(StringPrintF("Array<DATA_TYPE>::DataChecked() - index %llu out of bounds (%llu)\n" , (uint64_t)index , (uint64_t)data_array.size()));
    }
    return DataUnchecked(index);
 }

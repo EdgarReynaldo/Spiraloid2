@@ -27,7 +27,7 @@ public :
 
    DONTINLINE unsigned int Size() {return data_array.size();}
 
-   DONTINLINE DATA_TYPE& DataChecked(unsigned int index) throw (Exception);
+   DONTINLINE DATA_TYPE& DataChecked(unsigned int index);
 
    INLINE DATA_TYPE& DataUnchecked(unsigned int index) {return data_array[index];}
    

@@ -3,7 +3,7 @@
 
 
 #include "SpiraloidConfig.hpp"
-#include "Eagle/Config.hpp"
+#include "Eagle/ConfigFile.hpp"
 
 
 

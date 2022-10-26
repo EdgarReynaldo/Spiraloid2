@@ -4,7 +4,7 @@
 #ifndef Equations_HPP
 #define Equations_HPP
 
-#include "Position.hpp"
+#include "Eagle/Position.hpp"
 
 
 
