@@ -135,6 +135,9 @@
 		</VirtualTargets>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DEAGLE_LOG" />
+			<Add option="-DEAGLE_ASSERT_EXCEPTION" />
+			<Add option="-DDEBUG" />
 			<Add directory="E:/usr64/include" />
 		</Compiler>
 		<Linker>
